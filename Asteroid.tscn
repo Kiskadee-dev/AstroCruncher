@@ -1,0 +1,38 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Asteroid/rotate2/0061.png" type="Texture" id=1]
+[ext_resource path="res://Asteroid/rotate1/0041.png" type="Texture" id=2]
+[ext_resource path="res://Asteroid/rotate1/0001.png" type="Texture" id=3]
+[ext_resource path="res://Asteroid/rotate2/0051.png" type="Texture" id=4]
+[ext_resource path="res://Asteroid/rotate2/0021.png" type="Texture" id=5]
+[ext_resource path="res://Asteroid/rotate2/0041.png" type="Texture" id=6]
+[ext_resource path="res://Asteroid/rotate2/0031.png" type="Texture" id=7]
+[ext_resource path="res://Asteroid/rotate2/0011.png" type="Texture" id=8]
+[ext_resource path="res://Asteroid/rotate2/0001.png" type="Texture" id=9]
+[ext_resource path="res://Asteroid/rotate2/0071.png" type="Texture" id=10]
+[ext_resource path="res://Asteroid/rotate1/0061.png" type="Texture" id=11]
+[ext_resource path="res://Asteroid/rotate1/0051.png" type="Texture" id=12]
+[ext_resource path="res://Asteroid/rotate1/0011.png" type="Texture" id=13]
+[ext_resource path="res://Asteroid/rotate1/0031.png" type="Texture" id=14]
+[ext_resource path="res://Asteroid/rotate1/0021.png" type="Texture" id=15]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 2 ), ExtResource( 12 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "Rotate up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 1 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "Rotate right",
+"speed": 4.0
+} ]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "Rotate right"
+frame = 4
+playing = true
