@@ -22,5 +22,5 @@ position = Vector2( 232.908, 177.196 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-frame = 1
+frame = 2
 playing = true
