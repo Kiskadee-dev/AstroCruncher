@@ -47,6 +47,7 @@ texture = ExtResource( 4 )
 [node name="CanvasLayer2" parent="." instance=ExtResource( 7 )]
 
 [node name="Enemies" type="Node2D" parent="."]
+visible = false
 
 [node name="Enemy01" parent="Enemies" instance=ExtResource( 8 )]
 position = Vector2( 651.229, 210.283 )

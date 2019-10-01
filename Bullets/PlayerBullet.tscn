@@ -6,7 +6,9 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 32.7926
 
-[node name="player_bullet" type="Node2D"]
+[node name="player_bullet" type="Node2D" groups=[
+"player_bullet",
+]]
 scale = Vector2( 0.3, 0.3 )
 script = ExtResource( 1 )
 
