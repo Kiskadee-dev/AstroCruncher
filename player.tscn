@@ -15,10 +15,22 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 3 )
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -2.21912, 2.7739 )
 shape = SubResource( 1 )
+
+[node name="Shoot_pos" type="Node2D" parent="."]
+position = Vector2( 15.454, 1.71711 )
+
+[node name="Shoot_pos2" type="Node2D" parent="."]
+position = Vector2( -2.36103, -9.44411 )
+
+[node name="Shoot_pos3" type="Node2D" parent="."]
+position = Vector2( -3.43422, 15.6686 )
+
+[node name="shoot_cooldown" type="Timer" parent="."]
 [connection signal="shoot" from="Inputs" to="." method="_on_Inputs_shoot"]
 [connection signal="stopshooting" from="Inputs" to="." method="_on_Inputs_stopshooting"]
