@@ -29,7 +29,7 @@ func _physics_process(delta):
 		sprite.play("esq")
 	else:
 		sprite.play("default")
-	position.x = clamp(position.x, 100, screensize.x-5)
+	position.x = clamp(position.x, 100, screensize.x-100)
 	position.y = clamp(position.y, 100, screensize.y-100)
 
 func _process(delta):

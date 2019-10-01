@@ -26,6 +26,10 @@ BulletsPool="*res://BulletSystem/autoload/BulletsPool.gd"
 BulletSystem="*res://BulletSystem/autoload/BulletSystem.gd"
 TimersPool="*res://BulletSystem/autoload/TimersPool.gd"
 
+[debug]
+
+settings/fps/force_fps=60
+
 [display]
 
 window/stretch/mode="2d"
