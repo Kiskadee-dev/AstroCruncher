@@ -1,0 +1,52 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Art/Asteroid/rotate2/0031.png" type="Texture" id=1]
+[ext_resource path="res://Art/Asteroid/rotate1/0021.png" type="Texture" id=2]
+[ext_resource path="res://Art/Asteroid/rotate1/0011.png" type="Texture" id=3]
+[ext_resource path="res://Art/Asteroid/rotate2/0041.png" type="Texture" id=4]
+[ext_resource path="res://Art/Asteroid/rotate1/0001.png" type="Texture" id=5]
+[ext_resource path="res://Art/Asteroid/rotate2/0071.png" type="Texture" id=6]
+[ext_resource path="res://Art/Asteroid/rotate2/0051.png" type="Texture" id=7]
+[ext_resource path="res://Art/Asteroid/rotate2/0061.png" type="Texture" id=8]
+[ext_resource path="res://Art/Asteroid/rotate2/0011.png" type="Texture" id=9]
+[ext_resource path="res://Art/Asteroid/rotate2/0021.png" type="Texture" id=10]
+[ext_resource path="res://Art/Asteroid/rotate2/0001.png" type="Texture" id=11]
+[ext_resource path="res://Art/Asteroid/rotate1/0031.png" type="Texture" id=12]
+[ext_resource path="res://Enemies/Asteroid.gd" type="Script" id=13]
+[ext_resource path="res://Art/Asteroid/rotate1/0041.png" type="Texture" id=14]
+[ext_resource path="res://Art/Asteroid/rotate1/0051.png" type="Texture" id=15]
+[ext_resource path="res://Art/Asteroid/rotate1/0061.png" type="Texture" id=16]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 11 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 1 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "Rotate right",
+"speed": 4.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "Rotate up",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 18.8305
+
+[node name="Asteroid" type="Node2D" groups=[
+"Enemy",
+]]
+script = ExtResource( 13 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "Rotate right"
+frame = 5
+playing = true
+
+[node name="Asteroid" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Asteroid"]
+shape = SubResource( 2 )
+[connection signal="area_entered" from="Asteroid" to="." method="_on_Asteroid_area_entered"]
+[connection signal="body_entered" from="Asteroid" to="." method="_on_Asteroid_body_entered"]

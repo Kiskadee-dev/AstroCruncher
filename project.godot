@@ -16,12 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="Shoot em up"
-run/main_scene="res://test.tscn"
+run/main_scene="res://Scenes/test.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-player_stats="*res://player_stats.gd"
+player_stats="*res://Player/Scripts/player_stats.gd"
 BulletsPool="*res://BulletSystem/autoload/BulletsPool.gd"
 BulletSystem="*res://BulletSystem/autoload/BulletSystem.gd"
 TimersPool="*res://BulletSystem/autoload/TimersPool.gd"
