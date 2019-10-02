@@ -20,13 +20,6 @@ func _unload():
 	._unload()
 	$Asteroid.set_deferred("monitoring", false)
 
-func _on_Asteroid_body_entered(body):
-	if body:
-		body = body as Node2D
-		if body.is_in_group("player") and not hit_someone:
-			hit_someone = true
-			player_stats.damage(damage)
-			_unload()
 func _reset():
 	._reset()
 	health = 30
@@ -45,14 +38,23 @@ func damage(value):
 	if health == 0:
 		_unload()
 
+func _on_Asteroid_body_entered(body):
+	if visible:
+		if body:
+			body = body as Node2D
+			if body.is_in_group("player") and not hit_someone:
+				hit_someone = true
+				player_stats.damage(damage)
+				_unload()
 
 func _on_Asteroid_area_entered(area):
-	if area:
-		area = area as Area2D
-		if area.monitoring:
-			var p = area.get_parent()
-			if p.is_in_group("player_bullet"):
-				if p.visible and not p.hit_someone:
-					p.hit_someone = true
-					damage(p.damage)
-					p._unload()
+	if visible:
+		if area:
+			area = area as Area2D
+			if area.monitoring:
+				var p = area.get_parent()
+				if p.is_in_group("player_bullet"):
+					if p.visible and not p.hit_someone:
+						p.hit_someone = true
+						damage(p.damage)
+						p._unload()

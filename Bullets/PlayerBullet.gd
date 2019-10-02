@@ -9,12 +9,9 @@ func on_ready():
 	.on_ready()
 
 func _load():
-	._load()
 	$Area2D.set_deferred("monitoring", true)
+	._load()
 
 func _unload():
-	._unload()
 	$Area2D.set_deferred("monitoring", false)
-
-func _on_Area2D_area_entered(area):
-	pass
+	._unload()
