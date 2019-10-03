@@ -2,6 +2,7 @@ extends Node2D
 
 export (PackedScene) var Asteroid
 export (PackedScene) var Enemy01
+export (PackedScene) var Enemy02
 var SpawnPositions:Line2D
 
 var max_position:Vector2
@@ -30,6 +31,10 @@ func wave1():
 		yield(get_tree().create_timer(rand_range(2, 4)), "timeout")
 		for i in range(3):
 				var e:Node2D = BulletSystem.fire(Enemy01, Vector2(max_position.x+20, rand_range(max_position.y, min_position.y)), 180, 100, get_parent()) #100/scale
+				e.shoot_pat1()
+		yield(get_tree().create_timer(1), "timeout")
+		for i in range(3):
+				var e:Node2D = BulletSystem.fire(Enemy02, Vector2(max_position.x+20, rand_range(max_position.y, min_position.y)), 180, 100, get_parent()) #100/scale
 				e.shoot_pat1()
 		yield(get_tree().create_timer(1), "timeout")
 

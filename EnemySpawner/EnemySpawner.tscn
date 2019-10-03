@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://EnemySpawner/EnemySpawner.gd" type="Script" id=1]
 [ext_resource path="res://Enemies/Asteroid.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Enemies/Enemy01.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Enemies/Enemy02.tscn" type="PackedScene" id=4]
 
 [node name="EnemySpawner" type="Node2D"]
 script = ExtResource( 1 )
@@ -11,3 +12,4 @@ __meta__ = {
 }
 Asteroid = ExtResource( 2 )
 Enemy01 = ExtResource( 3 )
+Enemy02 = ExtResource( 4 )

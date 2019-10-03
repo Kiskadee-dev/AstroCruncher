@@ -42,9 +42,7 @@ func _on_Asteroid_body_entered(body):
 	if visible:
 		if body:
 			body = body as Node2D
-			if body.is_in_group("player") and not hit_someone:
-				hit_someone = true
-				player_stats.damage(damage)
+			if player_stats.collide(self, body):
 				_unload()
 
 func _on_Asteroid_area_entered(area):

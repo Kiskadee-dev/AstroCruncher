@@ -5,20 +5,38 @@ onready var projectile = preload("res://Bullets/EnemyBullet.tscn")
 var damage = 10
 var health = 30
 
-func shoot_pat1():
-	for j in range(4):
-		var orot = rotation_degrees
-		var ospeed = current_speed
-		yield(get_tree().create_timer(4), "timeout")
-		current_speed = 0
-		var s = rand_range(0, 36)
-		for i in range(s, 36+s):
-			rotation_degrees = i*10
-			shoot()
-			yield(TimersPool.create_timer(.1), "timeout")
-		rotation_degrees = orot
-		current_speed = ospeed
+var shooting:bool = false
+var shooted:int = 0
+var timer:Timer = Timer.new()
+var speed
+var original_rotation
 
+
+func start_pattern():
+	timer.disconnect("timeout", self, "start_pattern")
+	timer.wait_time = .1
+	shooting = true
+	shooted = 0
+	timer.start()
+
+func _process(delta):
+	if shooting and not player_stats.dead:
+		if timer.is_stopped(): 
+			if shooted < 36:
+				timer.start()
+				current_speed = 0
+				rotation_degrees = shooted*10
+				shoot()
+				shooted += 1
+			else:
+				change_speed(speed)
+				rotation = original_rotation
+				shooting = false
+				shooted = 0
+				timer.wait_time = 4
+				timer.stop()
+				timer.connect("timeout", self, "start_pattern")
+				timer.start()
 
 func shoot():
 	if visible:
@@ -26,14 +44,24 @@ func shoot():
 	else:
 		return
 
+func shoot_pat1():
+	original_rotation = rotation
+	speed = current_speed
+	timer.stop()
+	timer.wait_time = 4
+	timer.one_shot = true
+	timer.connect("timeout", self, "start_pattern")
+	timer.start()
+
 func on_ready():
 	use_lifespan = true
 	default_lifespan = 20
 	pooleable = false
+	force_physics = true
 	.on_ready()
 
 func _ready():
-	shoot_pat1()
+	add_child(timer)
 	on_ready()
 
 func _reset():

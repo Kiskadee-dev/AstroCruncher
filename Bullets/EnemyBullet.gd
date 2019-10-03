@@ -22,7 +22,5 @@ func _on_Area2D_area_entered(area):
 func _on_Area2D_body_entered(body):
 	if body:
 		body = body as Node2D
-		if body.is_in_group("player") and not hit_someone:
-			hit_someone = true
-			player_stats.damage(damage)
+		if player_stats.collide(self, body):
 			_unload()
