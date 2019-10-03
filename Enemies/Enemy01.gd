@@ -4,34 +4,66 @@ onready var projectile = preload("res://Bullets/EnemyBullet.tscn")
 
 var damage = 10
 var health = 30
+var timer:Timer = Timer.new()
+var shooting:bool = false
+
+var original_rotation
+var speed
+
+var shooted:int = 0
+
+func start_pattern():
+	timer.disconnect("timeout", self, "start_pattern")
+	timer.wait_time = .5
+	shooting = true
+	shooted = 0
+	timer.start()
+
+func _process(delta):
+	if shooting:
+		if timer.is_stopped(): 
+			if shooted < 3:
+				var p = get_tree().get_nodes_in_group("player")
+				timer.start()
+				if len(p) > 0:
+					current_speed = 0
+					look_at(p[0].position)
+					shoot()
+					shooted += 1
+			else:
+				change_speed(speed)
+				rotation = original_rotation
+				shooting = false
+				shooted = 0
+				timer.wait_time = 4
+				timer.stop()
+				timer.connect("timeout", self, "start_pattern")
+				timer.start()
 
 func shoot_pat1():
-	yield(get_tree().create_timer(4), "timeout")
-	var p = get_tree().get_nodes_in_group("player")
-	var original_rotation = rotation
-	if len(p) > 0:
-		var speed = current_speed
-		change_speed(0)
-		for i in range(3):
-			if not visible:
-				return
-			look_at(p[0].position)
-			shoot()
-			yield(get_tree().create_timer(.5), "timeout")
-		change_speed(speed)
-		rotation = original_rotation
+	original_rotation = rotation
+	speed = current_speed
+	timer.stop()
+	timer.wait_time = 4
+	timer.one_shot = true
+	timer.connect("timeout", self, "start_pattern")
+	timer.start()
 
 func shoot():
 	if visible:
-		var i = BulletSystem.fire(projectile, $shoot_point.global_position, rotation_degrees, 1000)
+		var i = BulletSystem.fire(projectile, $shoot_point.global_position, rotation_degrees, 1000, get_parent())
 	else:
 		return
 
 func on_ready():
+	force_physics = true
 	use_lifespan = false
+	pooleable = false
 	.on_ready()
+	shoot_pat1()
 
 func _ready():
+	add_child(timer)
 	on_ready()
 
 func _reset():
