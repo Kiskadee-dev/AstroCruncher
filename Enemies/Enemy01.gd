@@ -60,7 +60,6 @@ func on_ready():
 	use_lifespan = false
 	pooleable = false
 	.on_ready()
-	shoot_pat1()
 
 func _ready():
 	add_child(timer)
