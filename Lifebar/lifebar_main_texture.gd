@@ -9,7 +9,7 @@ func _ready():
 
 func decrease_life(new_value:float):
 	tween.stop_all()
-	tween.interpolate_property(self, "value", value, new_value, 1, Tween.TRANS_CIRC, Tween.EASE_IN_OUT)
+	tween.interpolate_property(self, "value", value, new_value, 1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	tween.start()
 	yield(tween, "tween_completed")
 	damage.decrease_life(new_value)

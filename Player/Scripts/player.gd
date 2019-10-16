@@ -23,6 +23,7 @@ func _ready():
 	player_stats.connect("god_mode_disabled", self, "stop_blink")
 	player_stats.connect("player_respawn", self, "animate_blink")
 	player_stats.connect("player_died", self, "animate_death")
+
 func _physics_process(delta):
 	movement_vector = inputs.movement_vector
 	move_and_slide(speed*movement_vector)
@@ -39,7 +40,12 @@ func _process(delta):
 	if shoot and not cooldown and not player_stats.dead:
 		cooldown = true
 		cooldown_timer.start()
-		shoot_bullet()
+		
+		match player_stats.powers:
+			player_stats.powerup.triple:
+				shoot_triple_bullet()
+			_:
+				shoot_bullet()
 
 func _on_Inputs_shoot():
 	shoot = true
@@ -52,6 +58,10 @@ func cooled():
 
 func shoot_bullet():
 	BulletSystem.fire(projectile, $Shoot_pos.global_position, 0, 1000, get_parent())
+func shoot_triple_bullet():
+	BulletSystem.fire(projectile, $Shoot_pos.global_position, 0, 1000, get_parent())
+	BulletSystem.fire(projectile, $Shoot_pos.global_position, -10, 1000, get_parent())
+	BulletSystem.fire(projectile, $Shoot_pos.global_position, 10, 1000, get_parent())
 
 func animate_blink():
 	show()

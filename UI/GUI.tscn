@@ -1,7 +1,22 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Lifebar/Lifebar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Font/new_dynamicfont.tres" type="DynamicFont" id=2]
 
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float offset=1.0;
+
+void vertex(){
+        VERTEX.y += sin(TIME+offset)*10.0;
+}
+
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/offset = 1.0
 
 [node name="GUI" type="CanvasLayer"]
 
@@ -16,14 +31,15 @@ margin_right = 154.0
 margin_bottom = 31.0
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
+material = SubResource( 2 )
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -60.0
-margin_top = 10.0
-margin_bottom = 40.0
+margin_left = -111.0
+margin_bottom = 44.0
 
 [node name="Label" type="Label" parent="MarginContainer2"]
-margin_top = 8.0
-margin_right = 60.0
-margin_bottom = 22.0
+modulate = Color( 0.313726, 1, 0.00392157, 1 )
+margin_right = 111.0
+margin_bottom = 44.0
+custom_fonts/font = ExtResource( 2 )
 text = "Score"

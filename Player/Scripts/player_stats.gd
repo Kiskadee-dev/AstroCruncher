@@ -1,5 +1,7 @@
 extends Node
 
+enum powerup{none, triple}
+
 signal health_updated
 signal player_died
 signal player_respawn
@@ -10,6 +12,13 @@ var health:float = 100
 var lifes:int = 3
 var dead:bool = false
 
+var powers:int = powerup.none
+
+onready var powerup_timer = Timer.new()
+
+func _ready():
+	add_child(powerup_timer)
+	powerup_timer.connect("timeout", self, "disable_powers")
 func damage(value:float):
 	health -= value
 	health = clamp(health, 0, 100)
@@ -36,3 +45,14 @@ func collide(object:Node2D, object2:Node2D)->bool:
 			object.hit_someone = true
 			return true
 	return false
+
+func powerup(up):
+	match up:
+		powerup.triple:
+			powerup_timer.wait_time = 6
+			powerup_timer.start()
+		_:
+			pass
+
+func disable_powers():
+	powers = powerup.none
