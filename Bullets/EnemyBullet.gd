@@ -17,7 +17,10 @@ func _unload():
 	$Area2D.set_deferred("monitoring", false)
 
 func _on_Area2D_area_entered(area):
-	pass
+	area = area as Area2D
+	if area:
+		if area.is_in_group("shield") and player_stats.shield:
+			_unload()
 
 func _on_Area2D_body_entered(body):
 	if body:

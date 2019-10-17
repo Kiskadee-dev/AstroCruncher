@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 var projectile = preload("res://Bullets/PlayerBullet.tscn")
+var shield = preload("res://Shield.tscn")
 var shoot_cooldown = .1
 onready var cooldown_timer:Timer = $shoot_cooldown
 
@@ -23,6 +24,7 @@ func _ready():
 	player_stats.connect("god_mode_disabled", self, "stop_blink")
 	player_stats.connect("player_respawn", self, "animate_blink")
 	player_stats.connect("player_died", self, "animate_death")
+	call_deferred("add_shield")
 
 func _physics_process(delta):
 	movement_vector = inputs.movement_vector
@@ -73,3 +75,9 @@ func stop_blink():
 
 func animate_death():
 	hide()
+
+func add_shield():
+	player_stats.shield_on()
+	var s = shield.instance()
+	get_parent().add_child(s)
+	s.player = self

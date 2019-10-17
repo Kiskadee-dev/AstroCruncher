@@ -7,19 +7,27 @@ signal player_died
 signal player_respawn
 signal god_mode_disabled
 signal game_over
+signal shield_over
 
 var health:float = 100
 var lifes:int = 3
 var dead:bool = false
 
 var powers:int = powerup.triple
+var shield:bool = false
 
 onready var powerup_timer = Timer.new()
+onready var shield_timer = Timer.new()
 
 func _ready():
 	add_child(powerup_timer)
+	add_child(shield_timer)
 	powerup_timer.connect("timeout", self, "disable_powers")
+	shield_timer.connect("timeout", self, "disable_shield")
+
 func damage(value:float):
+	if player_stats.shield:
+		return
 	health -= value
 	health = clamp(health, 0, 100)
 	emit_signal("health_updated")
@@ -54,5 +62,14 @@ func powerup(up):
 		_:
 			pass
 
+func shield_on():
+	shield_timer.wait_time = 6
+	shield_timer.start()
+	shield = true
+
+func disable_shield():
+	shield = false
+	emit_signal("shield_over")
+	
 func disable_powers():
 	powers = powerup.none
