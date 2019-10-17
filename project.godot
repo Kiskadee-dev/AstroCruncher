@@ -18,7 +18,7 @@ _global_script_class_icons={
 config/name="Shoot em up"
 run/main_scene="res://Scenes/MainMenu.tscn"
 boot_splash/image="res://Art/Asteroid/rotate1/0021.png"
-config/icon="res://Art/Asteroid/rotate1/0001.png"
+config/icon="res://Art/player_sprites/default/0001.png"
 
 [autoload]
 
