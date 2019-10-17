@@ -11,9 +11,10 @@ signal shield_over
 
 var health:float = 100
 var lifes:int = 3
+var score:int = 0
 var dead:bool = false
 
-var powers:int = powerup.triple
+var powers:int = powerup.none
 var shield:bool = false
 
 onready var powerup_timer = Timer.new()

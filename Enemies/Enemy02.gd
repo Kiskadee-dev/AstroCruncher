@@ -4,6 +4,7 @@ onready var projectile = preload("res://Bullets/EnemyBullet.tscn")
 
 var damage = 10
 var health = 30
+var player_score = 10
 
 var shooting:bool = false
 var shooted:int = 0
@@ -81,6 +82,7 @@ func damage(value):
 	health -= value
 	health = clamp(health, 0, 100)
 	if health == 0:
+		player_stats.score += player_score
 		_unload()
 
 func _on_Area2D_body_entered(body):

@@ -1,7 +1,7 @@
 extends "res://BulletSystem/Bullet2D.gd"
 var damage = 30
 var health = 30
-
+var player_score = 20
 func on_ready():
 	use_lifespan = false
 	default_lifespan = 15
@@ -36,6 +36,7 @@ func damage(value):
 	health -= value
 	health = clamp(health, 0, 100)
 	if health == 0:
+		player_stats.score += player_score
 		_unload()
 
 func _on_Asteroid_body_entered(body):
