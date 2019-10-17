@@ -22,10 +22,10 @@ func start_pattern():
 func _process(delta):
 	if shooting and not player_stats.dead:
 		if timer.is_stopped(): 
-			if shooted < 36:
+			if shooted < 12:
 				timer.start()
 				current_speed = 0
-				rotation_degrees = shooted*10
+				rotation_degrees = shooted*30
 				shoot()
 				shooted += 1
 			else:
@@ -40,7 +40,8 @@ func _process(delta):
 
 func shoot():
 	if visible:
-		var i = BulletSystem.fire(projectile, $shoot_point.global_position, rotation_degrees, 600, get_parent())
+		var i = BulletSystem.fire(projectile, $shoot_point.global_position, rotation_degrees, 100, get_parent())
+		i.scale = Vector2(.2,.2)
 	else:
 		return
 

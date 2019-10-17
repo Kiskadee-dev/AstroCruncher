@@ -32,6 +32,7 @@ z_index = -1
 texture = ExtResource( 3 )
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+editor/display_folded = true
 motion_mirroring = Vector2( 1900, 0 )
 script = ExtResource( 2 )
 parallax_speed = 12.0

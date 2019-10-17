@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Player/player_anim.tres" type="SpriteFrames" id=1]
+
+[node name="player_sprite" type="AnimatedSprite"]
+frames = ExtResource( 1 )
+playing = true

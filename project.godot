@@ -16,7 +16,8 @@ _global_script_class_icons={
 [application]
 
 config/name="Shoot em up"
-run/main_scene="res://Scenes/test.tscn"
+run/main_scene="res://Scenes/MainMenu.tscn"
+boot_splash/image="res://Art/Asteroid/rotate1/0021.png"
 config/icon="res://icon.png"
 
 [autoload]
@@ -26,6 +27,7 @@ BulletsPool="*res://BulletSystem/autoload/BulletsPool.gd"
 BulletSystem="*res://BulletSystem/autoload/BulletSystem.gd"
 TimersPool="*res://BulletSystem/autoload/TimersPool.gd"
 joystick_output="*res://JoystickSystem/autoload/joystick_output.gd"
+level_manager="*res://level_manager.gd"
 
 [debug]
 

@@ -1,6 +1,6 @@
 extends "res://BulletSystem/Bullet2D.gd"
 
-var damage = 3
+var damage = 6
 
 func _ready():
 	on_ready()

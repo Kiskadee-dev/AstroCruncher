@@ -11,7 +11,7 @@ onready var inputs = $Inputs
 var shoot = false
 var cooldown:bool = false
 
-onready var sprite = $Sprite
+onready var sprite = $player_sprite
 
 var screensize
 
