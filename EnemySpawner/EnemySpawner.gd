@@ -1,5 +1,7 @@
 extends Node2D
 
+signal wave_finished
+
 export (PackedScene) var Asteroid
 export (PackedScene) var Enemy01
 export (PackedScene) var Enemy02
@@ -14,29 +16,77 @@ func _ready():
 	update_spawn()
 	yield(get_tree().create_timer(1), "timeout")
 	wave1()
-
+#	yield(self, "wave_finished")
+#	wave2()
+#	yield(self, "wave_finished")
+#	wave1()
+#	wave2()
+#	yield(self, "wave_finished")
+#	yield(self, "wave_finished")
+#	wave3()
+#	yield(self, "wave_finished")
+#	wave3()
+#	wave2()
+#	yield(self, "wave_finished")
+#	yield(self, "wave_finished")
+#	wave3()
+#	wave2()
+#	wave1()
+#	yield(self, "wave_finished")
+#	yield(self, "wave_finished")
+#	yield(self, "wave_finished")
+	var m = $Level_Music
+	var t = Tween.new()
+	add_child(t)
+	t.interpolate_property(m, "volume_db", 0, -80, 2, Tween.TRANS_LINEAR, Tween.EASE_IN, 0)
+	t.start()
+	yield(get_tree().create_timer(4), "timeout")
+	m.stop()
+	$BOSS_Music.play()
+	t.queue_free()
 
 func update_spawn():
 	max_position = get_viewport().get_visible_rect().end
 	max_position.y = 0
 	min_position = get_viewport().get_visible_rect().end
 
-func wave1():
-	for j in range(80):
-		for i in range(10):
+func wave1(): #Asteroids
+	for j in range(5):
+		for i in range(rand_range(10, 25)):
 			var scale:float = rand_range(1, 3)
 			var b:Node2D = BulletSystem.fire(Asteroid, Vector2(max_position.x+20, rand_range(max_position.y, min_position.y)), 180, 100, get_parent()) #100/scale
 			b.scale = Vector2(scale, scale)
 			yield(get_tree().create_timer(.2), "timeout")
 		yield(get_tree().create_timer(rand_range(2, 4)), "timeout")
+	emit_signal("wave_finished")
+
+func wave2():
+	for w in range(5):
 		for i in range(3):
 				var e:Node2D = BulletSystem.fire(Enemy01, Vector2(max_position.x+20, rand_range(max_position.y, min_position.y)), 180, 100, get_parent()) #100/scale
 				e.shoot_pat1()
-		yield(get_tree().create_timer(1), "timeout")
+				yield(get_tree().create_timer(1), "timeout")
+		yield(get_tree().create_timer(2), "timeout")
 		for i in range(3):
 				var e:Node2D = BulletSystem.fire(Enemy02, Vector2(max_position.x+20, rand_range(max_position.y, min_position.y)), 180, 100, get_parent()) #100/scale
 				e.shoot_pat1()
+				yield(get_tree().create_timer(1), "timeout")
 		yield(get_tree().create_timer(1), "timeout")
+	emit_signal("wave_finished")
+
+func wave3():
+	for w in range(5):
+		for i in range(3):
+				var e:Node2D = BulletSystem.fire(Enemy01, Vector2(max_position.x+20, rand_range(max_position.y, min_position.y)), 180, 100, get_parent()) #100/scale
+				e.shoot_pat1()
+				yield(get_tree().create_timer(.2), "timeout")
+		yield(get_tree().create_timer(2), "timeout")
+		for i in range(3):
+				var e:Node2D = BulletSystem.fire(Enemy02, Vector2(max_position.x+20, rand_range(max_position.y, min_position.y)), 180, 100, get_parent()) #100/scale
+				e.shoot_pat1()
+				yield(get_tree().create_timer(.2), "timeout")
+		yield(get_tree().create_timer(1), "timeout")
+	emit_signal("wave_finished")
 
 func _process(delta):
 	pass

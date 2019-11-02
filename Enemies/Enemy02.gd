@@ -76,6 +76,7 @@ func _load():
 
 func _unload():
 	._unload()
+
 	$Area2D.set_deferred("monitoring", false)
 
 func damage(value):
@@ -83,6 +84,8 @@ func damage(value):
 	health = clamp(health, 0, 100)
 	if health == 0:
 		player_stats.score += player_score
+		if game_configuration.sfx:
+			AudioPool.play(AudioPool.soundlib.boom)
 		_unload()
 
 func _on_Area2D_body_entered(body):

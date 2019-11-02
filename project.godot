@@ -28,6 +28,8 @@ BulletSystem="*res://BulletSystem/autoload/BulletSystem.gd"
 TimersPool="*res://BulletSystem/autoload/TimersPool.gd"
 joystick_output="*res://JoystickSystem/autoload/joystick_output.gd"
 level_manager="*res://level_manager.gd"
+game_configuration="*res://game_configuration.gd"
+AudioPool="*res://AudioPool.gd"
 
 [debug]
 

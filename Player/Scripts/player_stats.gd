@@ -27,25 +27,26 @@ func _ready():
 	shield_timer.connect("timeout", self, "disable_shield")
 
 func damage(value:float):
-	if player_stats.shield:
-		return
-	health -= value
-	health = clamp(health, 0, 100)
-	emit_signal("health_updated")
-	if health <= 0:
-		if lifes > 0:
-			lifes -= 1
-			dead = true
-			emit_signal("player_died")
-			yield(get_tree().create_timer(3), "timeout")
-			health = 100
-			emit_signal("health_updated")
-			emit_signal("player_respawn")
-			yield(get_tree().create_timer(3), "timeout")
-			emit_signal("god_mode_disabled")
-			dead = false
-		else:
-			emit_signal("game_over")
+	if not dead:
+		if player_stats.shield:
+			return
+		health -= value
+		health = clamp(health, 0, 100)
+		emit_signal("health_updated")
+		if health <= 0:
+			if lifes > 0:
+				lifes -= 1
+				dead = true
+				emit_signal("player_died")
+				yield(get_tree().create_timer(3), "timeout")
+				health = 100
+				emit_signal("health_updated")
+				emit_signal("player_respawn")
+				yield(get_tree().create_timer(3), "timeout")
+				emit_signal("god_mode_disabled")
+				dead = false
+			else:
+				emit_signal("game_over")
 
 func collide(object:Node2D, object2:Node2D)->bool:
 	if object2.is_in_group("player"):

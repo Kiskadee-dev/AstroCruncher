@@ -16,6 +16,8 @@ onready var sprite = $player_sprite
 
 var screensize
 
+onready var death_sound = $AudioStreamPlayer2D_boom
+
 func _ready():
 	screensize = get_viewport_rect().size
 	cooldown_timer.wait_time = shoot_cooldown
@@ -24,7 +26,6 @@ func _ready():
 	player_stats.connect("god_mode_disabled", self, "stop_blink")
 	player_stats.connect("player_respawn", self, "animate_blink")
 	player_stats.connect("player_died", self, "animate_death")
-	call_deferred("add_shield")
 
 func _physics_process(delta):
 	movement_vector = inputs.movement_vector
@@ -74,6 +75,8 @@ func stop_blink():
 	$AnimationPlayer.get_animation("blink").loop = false
 
 func animate_death():
+	if game_configuration.sfx:
+		AudioPool.play(AudioPool.soundlib.boom)
 	hide()
 
 func add_shield():

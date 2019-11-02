@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Epic Battle.ogg-f2dffcdea63229294c8ef98a3551e97d.oggstr"
+
+[deps]
+
+source_file="res://Music/Epic Battle.ogg"
+dest_files=[ "res://.import/Epic Battle.ogg-f2dffcdea63229294c8ef98a3551e97d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

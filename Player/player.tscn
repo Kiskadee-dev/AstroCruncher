@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player/Scripts/player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Scripts/Inputs.gd" type="Script" id=2]
 [ext_resource path="res://Player/player_sprite.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Music/SFX/490266__anomaex__sci-fi-explosion-2.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15.0001, 9.80185 )
@@ -31,7 +32,7 @@ script = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="player_sprite" parent="." instance=ExtResource( 3 )]
-frame = 3
+frame = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -2.21912, 2.7739 )
@@ -50,5 +51,8 @@ position = Vector2( -3.43422, 15.6686 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/blink = SubResource( 2 )
+
+[node name="AudioStreamPlayer2D_boom" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
 [connection signal="shoot" from="Inputs" to="." method="_on_Inputs_shoot"]
 [connection signal="stopshooting" from="Inputs" to="." method="_on_Inputs_stopshooting"]
