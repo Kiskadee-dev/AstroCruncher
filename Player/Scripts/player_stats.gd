@@ -20,7 +20,15 @@ var shield:bool = false
 onready var powerup_timer = Timer.new()
 onready var shield_timer = Timer.new()
 
+var bullet_explosion_effect = preload("res://explosion_bullet_player_damage.tscn")
+var heal_box = preload("res://Heal.tscn")
+onready var health_timer = Timer.new()
+
 func _ready():
+	add_child(health_timer)
+	health_timer.wait_time = 20
+	health_timer.one_shot = true
+	health_timer.start()
 	add_child(powerup_timer)
 	add_child(shield_timer)
 	powerup_timer.connect("timeout", self, "disable_powers")
@@ -48,9 +56,20 @@ func damage(value:float):
 			else:
 				emit_signal("game_over")
 
+func heal(value:float):
+	if not dead:
+		health += value
+		health = clamp(health, 0, 100)
+		emit_signal("health_updated")
+
+
+
 func collide(object:Node2D, object2:Node2D)->bool:
 	if object2.is_in_group("player"):
 		if not dead and not object.hit_someone and object.visible:
+			var ex = bullet_explosion_effect.instance()
+			object2.get_parent().add_child(ex)
+			ex.position = object.position
 			damage(object.damage)
 			object.hit_someone = true
 			return true
@@ -75,3 +94,19 @@ func disable_shield():
 	
 func disable_powers():
 	powers = powerup.none
+
+func spawn_thing_chance(object:Node2D):
+	var heal_chance = 10
+	var chance = rand_range(0, 100)
+	if chance < 10:
+		if health_timer.is_stopped():
+			var h = heal_box.instance()
+			h.position = object.position
+			object.get_parent().add_child(h)
+			health_timer.start()
+	
+func add_score(sc):
+	score += sc
+	if score >= 1000:
+		lifes += 1
+		score -= 1000

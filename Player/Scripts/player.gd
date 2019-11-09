@@ -61,6 +61,7 @@ func cooled():
 
 func shoot_bullet():
 	BulletSystem.fire(projectile, $Shoot_pos.global_position, 0, 1000, get_parent())
+
 func shoot_triple_bullet():
 	BulletSystem.fire(projectile, $Shoot_pos.global_position, 0, 1000, get_parent())
 	BulletSystem.fire(projectile, $Shoot_pos.global_position, -10, 1000, get_parent())

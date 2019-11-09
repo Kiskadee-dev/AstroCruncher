@@ -6,7 +6,7 @@
 [ext_resource path="res://Music/SFX/490266__anomaex__sci-fi-explosion-2.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 15.0001, 9.80185 )
+extents = Vector2( 4.30674, 4.36183 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "blink"
@@ -32,10 +32,10 @@ script = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="player_sprite" parent="." instance=ExtResource( 3 )]
-frame = 5
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -2.21912, 2.7739 )
+position = Vector2( -2.21912, 1.99744 )
 shape = SubResource( 1 )
 
 [node name="Shoot_pos" type="Node2D" parent="."]

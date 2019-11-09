@@ -1,9 +1,11 @@
 extends "res://BulletSystem/Bullet2D.gd"
 
 var damage = 1
+var original_damage
 
 func _ready():
 	on_ready()
+	original_damage = damage
 
 func on_ready():
 	.on_ready()
@@ -14,6 +16,7 @@ func _load():
 
 func _unload():
 	._unload()
+	damage = original_damage
 	$Area2D.set_deferred("monitoring", false)
 
 func _on_Area2D_area_entered(area):

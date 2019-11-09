@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Boss Attacks/Warning_Pattern.gd" type="Script" id=1]
+[ext_resource path="res://Boss Attacks/warning_area.tscn" type="PackedScene" id=2]
+
+[node name="Warning_Pattern2" type="Node2D"]
+position = Vector2( 497.069, -390.57 )
+rotation = 1.5708
+script = ExtResource( 1 )
+
+[node name="Warning_Area_attack2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 438.083, 0 )
+scale = Vector2( 0.92, 1 )
+
+[node name="Warning_Area_attack3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 726.893, 0 )
+
+[node name="Warning_Area_attack4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1024.98, 0 )

@@ -4,7 +4,7 @@
 [ext_resource path="res://Art/Bullet/Bullet.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 67.6933, 10 )
+extents = Vector2( 44.0022, 10 )
 
 [node name="player_bullet" type="Node2D" groups=[
 "player_bullet",
@@ -16,8 +16,12 @@ script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="Area2D"]
 modulate = Color( 0.172549, 0.458824, 0.952941, 1 )
-scale = Vector2( 4.13, 0.72 )
+show_behind_parent = true
+position = Vector2( 19.5905, 0 )
+scale = Vector2( 2.90559, 0.72 )
+z_index = -1
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 19.1349, 0 )
 shape = SubResource( 1 )

@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://explosion_bullet.gd" type="Script" id=1]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0.9796 ), 0.0, 0.0, 0, 0, Vector2( 0.994017, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.538462, 1 )
+colors = PoolColorArray( 0.78776, 0.667077, 0.0153859, 1, 0.929688, 0.0617371, 0.672015, 1, 0.960938, 0.207624, 0.033783, 1 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 0.9972 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -0.0274233, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+trail_divisor = 5
+trail_size_modifier = SubResource( 6 )
+trail_color_modifier = SubResource( 4 )
+emission_shape = 1
+emission_sphere_radius = 1.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 20.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 2 )
+
+[node name="explosion_bullet" type="Particles2D"]
+scale = Vector2( 10, 10 )
+emitting = false
+amount = 50
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource( 7 )
+script = ExtResource( 1 )

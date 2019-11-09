@@ -84,9 +84,10 @@ func damage(value):
 	health -= value
 	health = clamp(health, 0, 100)
 	if health == 0:
-		player_stats.score += player_score
+		player_stats.add_score(player_score)
 		if game_configuration.sfx:
 			AudioPool.play(AudioPool.soundlib.boom)
+		player_stats.spawn_thing_chance(self)
 		_unload()
 
 func _on_Area2D_body_entered(body):
@@ -95,6 +96,8 @@ func _on_Area2D_body_entered(body):
 			body = body as Node2D
 			if player_stats.collide(self, body):
 				_unload()
+
+var bullet_explosion_effect = preload("res://explosion_bullet.tscn")
 
 func _on_Area2D_area_entered(area):
 	if visible:
@@ -106,4 +109,7 @@ func _on_Area2D_area_entered(area):
 					if p.visible and not p.hit_someone:
 						p.hit_someone = true
 						damage(p.damage)
+						var ex = bullet_explosion_effect.instance()
+						get_parent().add_child(ex)
+						ex.position = p.position
 						p._unload()
