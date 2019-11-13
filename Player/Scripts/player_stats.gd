@@ -1,6 +1,6 @@
 extends Node
 
-enum powerup{none, triple}
+enum powerups{none, triple}
 
 signal health_updated
 signal player_died
@@ -14,24 +14,34 @@ var lifes:int = 3
 var score:int = 0
 var dead:bool = false
 
-var powers:int = powerup.none
+var powers:int = powerups.none
 var shield:bool = false
 
 onready var powerup_timer = Timer.new()
+onready var triple_timer = Timer.new()
 onready var shield_timer = Timer.new()
+onready var health_timer = Timer.new()
 
 var bullet_explosion_effect = preload("res://explosion_bullet_player_damage.tscn")
 var heal_box = preload("res://Heal.tscn")
-onready var health_timer = Timer.new()
+var powerup_box = preload("res://PowerUp_TripleShoot.tscn")
 
 func _ready():
 	add_child(health_timer)
-	health_timer.wait_time = 20
-	health_timer.one_shot = true
-	health_timer.start()
 	add_child(powerup_timer)
+	add_child(triple_timer)
 	add_child(shield_timer)
-	powerup_timer.connect("timeout", self, "disable_powers")
+	
+	triple_timer.wait_time = 20
+	health_timer.wait_time = 20
+	
+	triple_timer.one_shot = true
+	health_timer.one_shot = true
+	
+	triple_timer.start()
+	health_timer.start()
+	
+	triple_timer.connect("timeout", self, "disable_powers")
 	shield_timer.connect("timeout", self, "disable_shield")
 
 func damage(value:float):
@@ -77,9 +87,10 @@ func collide(object:Node2D, object2:Node2D)->bool:
 
 func powerup(up):
 	match up:
-		powerup.triple:
+		powerups.triple:
 			powerup_timer.wait_time = 6
 			powerup_timer.start()
+			powers = powerups.triple
 		_:
 			pass
 
@@ -93,17 +104,26 @@ func disable_shield():
 	emit_signal("shield_over")
 	
 func disable_powers():
-	powers = powerup.none
+	powers = powerups.none
 
 func spawn_thing_chance(object:Node2D):
 	var heal_chance = 10
+	var triple_shoot_chance = 8
 	var chance = rand_range(0, 100)
+
+	if chance < 8 and not health_timer.is_stopped():
+		if triple_timer.is_stopped():
+			var h = powerup_box.instance()
+			h.position = object.position
+			object.get_parent().call_deferred("add_child",h)
+			triple_timer.start()
 	if chance < 10:
 		if health_timer.is_stopped():
 			var h = heal_box.instance()
 			h.position = object.position
-			object.get_parent().add_child(h)
+			object.get_parent().call_deferred("add_child",h)
 			health_timer.start()
+			
 	
 func add_score(sc):
 	score += sc

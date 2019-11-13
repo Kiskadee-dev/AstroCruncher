@@ -45,7 +45,7 @@ func _process(delta):
 		cooldown_timer.start()
 		
 		match player_stats.powers:
-			player_stats.powerup.triple:
+			player_stats.powerups.triple:
 				shoot_triple_bullet()
 			_:
 				shoot_bullet()

@@ -1,18 +1,13 @@
-extends "res://BulletSystem/Bullet2D.gd"
+extends "res://Enemies/EnemyClass.gd"
 
-onready var projectile = preload("res://Bullets/EnemyBullet.tscn")
-
-var damage = 10
-var health = 30
-var player_score = 12
-
-var timer:Timer = Timer.new()
-var shooting:bool = false
-
-var original_rotation
-var speed
-
-var shooted:int = 0
+func _ready():
+	damage = 10
+	health = 30
+	player_score = 12
+	original_damage = damage
+	original_health = health
+	original_rotation = rotation
+	on_ready()
 
 func start_pattern():
 	timer.disconnect("timeout", self, "start_pattern")
@@ -58,58 +53,22 @@ func shoot():
 		return
 
 func on_ready():
-	force_physics = true
-	use_lifespan = false
-	pooleable = false
 	.on_ready()
-
-func _ready():
-	add_child(timer)
-	on_ready()
 
 func _reset():
 	._reset()
-	health = 30
 
 func _load():
 	._load()
-	$Area2D.set_deferred("monitoring", true)
 
 func _unload():
 	._unload()
 
-	$Area2D.set_deferred("monitoring", false)
-
 func damage(value):
-	health -= value
-	health = clamp(health, 0, 100)
-	if health == 0:
-		player_stats.add_score(player_score)
-		if game_configuration.sfx:
-			AudioPool.play(AudioPool.soundlib.boom)
-		player_stats.spawn_thing_chance(self)
-		_unload()
+	.damage(value)
 
 func _on_Area2D_body_entered(body):
-	if visible:
-		if body:
-			body = body as Node2D
-			if player_stats.collide(self, body):
-				_unload()
-
-var bullet_explosion_effect = preload("res://explosion_bullet.tscn")
+	._on_Area2D_body_entered(body)
 
 func _on_Area2D_area_entered(area):
-	if visible:
-		if area:
-			area = area as Area2D
-			if area.monitoring:
-				var p = area.get_parent()
-				if p.is_in_group("player_bullet"):
-					if p.visible and not p.hit_someone:
-						p.hit_someone = true
-						damage(p.damage)
-						var ex = bullet_explosion_effect.instance()
-						get_parent().add_child(ex)
-						ex.position = p.position
-						p._unload()
+	._on_Area2D_area_entered(area)
