@@ -3,7 +3,7 @@ extends "res://addons/gut/test.gd"
 onready var scene = preload("res://unit_testing/test_scene.tscn")
 onready var player = preload("res://Player/player.tscn")
 var scene_instance
-var player_instance
+var player_instance:KinematicBody2D
 
 func before_each():
 	scene_instance = scene.instance()
@@ -66,8 +66,8 @@ func test_collision():
 	assert_true(player_instance.is_in_group("player"), "Jogador está no grupo jogador")
 	player_instance.position = Vector2(b.position.x-100, b.position.y)
 	player_instance = player_instance as KinematicBody2D
-	for i in range(1000):
-		player_instance.move_and_slide(Vector2(10,0), Vector2(0,1))
+	player_instance.translate(b.position - player_instance.position)
+		
 	yield(yield_for(5), YIELD)
 	assert_lt(player_stats.health, 100.0, "A vida precisa estar menor já que tomou dano")
 
