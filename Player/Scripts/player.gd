@@ -59,8 +59,8 @@ func _on_Inputs_stopshooting():
 func cooled():
 	cooldown = false
 
-func shoot_bullet():
-	BulletSystem.fire(projectile, $Shoot_pos.global_position, 0, 1000, get_parent())
+func shoot_bullet()->Node:
+	return BulletSystem.fire(projectile, $Shoot_pos.global_position, 0, 1000, get_parent())
 
 func shoot_triple_bullet():
 	BulletSystem.fire(projectile, $Shoot_pos.global_position, 0, 1000, get_parent())

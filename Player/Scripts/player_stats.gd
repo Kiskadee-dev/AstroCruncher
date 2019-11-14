@@ -58,14 +58,17 @@ func damage(value:float):
 				dead = true
 				emit_signal("player_died")
 				yield(get_tree().create_timer(3), "timeout")
-				health = 100
-				emit_signal("health_updated")
-				emit_signal("player_respawn")
-				yield(get_tree().create_timer(3), "timeout")
-				emit_signal("god_mode_disabled")
-				dead = false
+				respawn()
 			else:
 				emit_signal("game_over")
+
+func respawn():
+	health = 100
+	emit_signal("health_updated")
+	emit_signal("player_respawn")
+	yield(get_tree().create_timer(3), "timeout")
+	emit_signal("god_mode_disabled")
+	dead = false
 
 func heal(value:float):
 	if not dead:

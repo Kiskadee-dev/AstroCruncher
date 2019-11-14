@@ -7,8 +7,8 @@ var player_instance
 
 func before_each():
 	scene_instance = scene.instance()
-	player_instance = player.instance()
 	add_child(scene_instance)
+	player_instance = player.instance()
 	scene_instance.add_child(player_instance)
 
 func test_life():
@@ -42,11 +42,45 @@ func test_blink():
 	yield(yield_for(3), YIELD)
 	assert_true(player_instance.get_node("AnimationPlayer").is_playing(), "Animador deve estar tocando")
 	assert_eq(player_instance.get_node("AnimationPlayer").current_animation, "blink", "Deve estar piscando")
-	
+
+func test_shoot():
+	assert_eq(player_instance.get_parent(), scene_instance)
+	gut.simulate(player_instance, 300, .1)
+	var b = player_instance.shoot_bullet()
+
+func test_collision():
+	assert_false(player_stats.dead, "Player não pode estar morto aqui")
+	gut.simulate(player_instance, 300, .1)
+	var asteroid = preload("res://Enemies/Asteroid.tscn")
+	asteroid = asteroid as PackedScene
+	player_instance.position = Vector2(100, 100)
+	var b = asteroid.instance()
+	b.position = Vector2(300,300)
+	scene_instance.add_child(b)
+	b.scale = Vector2(3,3)
+	gut.simulate(b, 300, .1)
+	yield(yield_for(5), YIELD)
+	assert_is(b, Node2D, "b é um node2D")
+	assert_true(b.is_in_group("enemy"), "b está no grupo enemy")
+	assert_true(player_instance.is_in_group("player"), "Jogador está no grupo jogador")
+	player_instance.position = b.position
+	yield(yield_for(5), YIELD)
+	assert_lt(player_stats.health, 100, "A vida precisa estar menor já que tomou dano")
+
 func after_each():
+	for i in BulletsPool.active_objects:
+		for j in BulletsPool.active_objects[i]:
+			j.queue_free()
+	for i in BulletsPool.inactive_objects:
+		for j in BulletsPool.inactive_objects[i]:
+			j.queue_free()
+	
+	player_stats.dead = false
+
+	BulletsPool.active_objects = {}
+	BulletsPool.inactive_objects = {}
 	player_stats.lifes = 3
 	player_stats.health = 100.0
-	scene_instance.queue_free()
 	player_instance.queue_free()
-
+	scene_instance.queue_free()
 
