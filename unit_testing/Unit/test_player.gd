@@ -64,7 +64,10 @@ func test_collision():
 	assert_is(b, Node2D, "b é um node2D")
 	assert_true(b.is_in_group("enemy"), "b está no grupo enemy")
 	assert_true(player_instance.is_in_group("player"), "Jogador está no grupo jogador")
-	player_instance.position = b.position
+	player_instance.position = Vector2(b.position.x-100, b.position.y)
+	player_instance = player_instance as KinematicBody2D
+	for i in range(1000):
+		player_instance.move_and_slide(Vector2(10,0), Vector2(0,1))
 	yield(yield_for(5), YIELD)
 	assert_lt(player_stats.health, 100.0, "A vida precisa estar menor já que tomou dano")
 
