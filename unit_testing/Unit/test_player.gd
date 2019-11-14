@@ -16,7 +16,8 @@ func test_life():
 	assert_eq(player_stats.health, 100.0, "HP no máximo")
 	player_stats.damage(50)
 	assert_eq(player_stats.health, 50.0, "HP na metade devido ao dano")
-
+	assert_eq(player_instance.position, Vector2(10,10), "Should fail")
+	assert_eq(player_instance.position, Vector2(), "Should be ok")
 func after_each():
 	scene_instance.queue_free()
 
