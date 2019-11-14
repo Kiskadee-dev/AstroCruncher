@@ -37,11 +37,12 @@ func _ready():
 	
 	triple_timer.one_shot = true
 	health_timer.one_shot = true
+	powerup_timer.one_shot = true
 	
 	triple_timer.start()
 	health_timer.start()
 	
-	triple_timer.connect("timeout", self, "disable_powers")
+	powerup_timer.connect("timeout", self, "disable_powers")
 	shield_timer.connect("timeout", self, "disable_shield")
 
 func damage(value:float):
