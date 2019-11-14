@@ -10,11 +10,16 @@ platform:
 node:
   runner: potato-core
 
+
 steps:
+- name: submodules
+  commands:
+  - git submodule update --recursive --remote
+
 - name: export
   commands:
-  - Godot_v3.1.1-stable_linux_headless.64 --export-debug "pck" --path ProjetoIntegradoJogosDigitais/ jogo_exportado_linux
+  - Godot_v3.1.1-stable_linux_headless.64 --export-debug "Linux/X11" --path ProjetoIntegradoJogosDigitais/ jogo_exportado_linux
 
 - name: gut
   commands:
-  - Godot_v3.1.1-stable_linux_headless.64 -d -s --path . addons/gut/gut_cmdln.gd -gdir=res://unit_testing/Unit/ -gprefix=test -gexit
+  - Godot_v3.1.1-stable_linux_headless.64 -s --path . addons/gut/gut_cmdln.gd -gdir=res://unit_testing/Unit/ -gprefix=test -gexit
