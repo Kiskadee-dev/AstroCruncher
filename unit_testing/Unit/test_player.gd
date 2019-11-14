@@ -31,7 +31,22 @@ func test_powerup():
 	yield(yield_for(7), YIELD)
 	assert_true(player_stats.powerup_timer.is_stopped(), "Tempo de poder triplo acaba")
 	assert_eq(player_stats.powers, player_stats.powerups.none, "Nao deve ter mais poderes")
+
+func test_blink():
+	gut.simulate(player_instance, 300, .1)
+	assert_true(player_instance.visible, "Jogador deve estar vivo")
+	player_stats.damage(110)
+	yield(yield_for(1), YIELD)
+	assert_true(player_stats.dead, "Jogador morreu")
+	assert_false(player_instance.visible, "Jogador invisivel")
+	yield(yield_for(3), YIELD)
+	assert_true(player_instance.get_node("AnimationPlayer").is_playing(), "Animador deve estar tocando")
+	assert_eq(player_instance.get_node("AnimationPlayer").current_animation, "blink", "Deve estar piscando")
+	
 func after_each():
+	player_stats.lifes = 3
+	player_stats.health = 100.0
 	scene_instance.queue_free()
+	player_instance.queue_free()
 
 
