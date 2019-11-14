@@ -49,6 +49,7 @@ func test_shoot():
 	var b = player_instance.shoot_bullet()
 
 func test_collision():
+	yield(yield_for(10), YIELD)
 	assert_false(player_stats.dead, "Player não pode estar morto aqui")
 	gut.simulate(player_instance, 300, .1)
 	var asteroid = preload("res://Enemies/Asteroid.tscn")
@@ -65,7 +66,7 @@ func test_collision():
 	assert_true(player_instance.is_in_group("player"), "Jogador está no grupo jogador")
 	player_instance.position = b.position
 	yield(yield_for(5), YIELD)
-	assert_lt(player_stats.health, 100, "A vida precisa estar menor já que tomou dano")
+	assert_lt(player_stats.health, 100.0, "A vida precisa estar menor já que tomou dano")
 
 func after_each():
 	for i in BulletsPool.active_objects:
@@ -75,8 +76,6 @@ func after_each():
 		for j in BulletsPool.inactive_objects[i]:
 			j.queue_free()
 	
-	player_stats.dead = false
-
 	BulletsPool.active_objects = {}
 	BulletsPool.inactive_objects = {}
 	player_stats.lifes = 3
