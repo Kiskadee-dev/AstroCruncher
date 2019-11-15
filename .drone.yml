@@ -18,7 +18,9 @@ steps:
 
 - name: export
   commands:
-  - Godot_v3.1.1-stable_linux_headless.64 --export-debug "Linux/X11" --path ProjetoIntegradoJogosDigitais/ jogo_exportado_linux
+  - mkdir builds
+  - mkdir builds/linux
+  - Godot_v3.1.1-stable_linux_headless.64 --export-debug "Linux/X11" --path . builds/linux/jogo_exportado_linux
 
 - name: gut
   commands:
