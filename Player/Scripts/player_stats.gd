@@ -37,11 +37,12 @@ func _ready():
 	
 	triple_timer.one_shot = true
 	health_timer.one_shot = true
+	powerup_timer.one_shot = true
 	
 	triple_timer.start()
 	health_timer.start()
 	
-	triple_timer.connect("timeout", self, "disable_powers")
+	powerup_timer.connect("timeout", self, "disable_powers")
 	shield_timer.connect("timeout", self, "disable_shield")
 
 func damage(value:float):
@@ -57,14 +58,17 @@ func damage(value:float):
 				dead = true
 				emit_signal("player_died")
 				yield(get_tree().create_timer(3), "timeout")
-				health = 100
-				emit_signal("health_updated")
-				emit_signal("player_respawn")
-				yield(get_tree().create_timer(3), "timeout")
-				emit_signal("god_mode_disabled")
-				dead = false
+				respawn()
 			else:
 				emit_signal("game_over")
+
+func respawn():
+	health = 100
+	emit_signal("health_updated")
+	emit_signal("player_respawn")
+	yield(get_tree().create_timer(3), "timeout")
+	emit_signal("god_mode_disabled")
+	dead = false
 
 func heal(value:float):
 	if not dead:
