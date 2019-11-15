@@ -19,7 +19,7 @@ func attack():
 	yield(self, "shooting_finished")
 	$AnimationPlayer.play("despawn")
 	yield($AnimationPlayer, "animation_finished")
-	queue_free()
+	call_deferred("queue_free")
 
 var shooted:int = 0
 

@@ -14,12 +14,11 @@ var cooldown:bool = false
 
 onready var sprite = $player_sprite
 
-var screensize
+onready var screensize = get_viewport_rect().size
 
 onready var death_sound = $AudioStreamPlayer2D_boom
 
 func _ready():
-	screensize = get_viewport_rect().size
 	cooldown_timer.wait_time = shoot_cooldown
 	cooldown_timer.one_shot = true
 	cooldown_timer.connect("timeout", self, "cooled")

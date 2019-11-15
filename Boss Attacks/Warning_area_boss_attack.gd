@@ -13,10 +13,23 @@ func start_attack():
 func _ready():
 	childs = get_children()
 
+func done()->bool:
+	var c = get_children()
+	for i in c:
+		if not i.done: 
+			return false
+		if i.attacking:
+			return false
+	return true
+
 func _process(delta):
 	if attack:
 		for i in childs:
 			if i.attacking:
 				return
 		emit_signal("attack_finished")
-		call_deferred("queue_free")
+		hide()
+		position = Vector2(2000,2000)
+		yield(get_tree().create_timer(10), "timeout")
+		if done():
+			call_deferred("queue_free")

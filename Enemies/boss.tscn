@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Enemies/boss.gd" type="Script" id=1]
 [ext_resource path="res://Art/Boss/cupboss.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 15.9393, 45.7703 )
 
 [node name="boss" type="Node2D"]
 script = ExtResource( 1 )
@@ -10,7 +13,13 @@ script = ExtResource( 1 )
 scale = Vector2( 4.64026, 4.64026 )
 texture = ExtResource( 2 )
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Damage_Area2D" type="Area2D" parent="."]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PoolVector2Array( 33.1627, -196.847, 33.9996, -109.662, -35.5288, -137.643, -46.5516, -122.38, -21.1143, -59.6352, 150.675, -60.5818, 157.794, 57.3759, 77.2429, 68.3987, -22.1476, 77.4182, -52.4868, 163.364, 33.1518, 131.144, 34.8476, 223.566, -71.9887, 178.627, -119.472, 59.0718, -119.172, -71.0535, -60.3692, -162.882 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damage_Area2D"]
+position = Vector2( 17.8507, -153.516 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Damage_Area2D"]
+position = Vector2( 17.8507, 174.313 )
+shape = SubResource( 1 )
+[connection signal="area_entered" from="Damage_Area2D" to="." method="_on_Damage_Area2D_area_entered"]

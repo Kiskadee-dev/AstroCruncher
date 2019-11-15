@@ -10,6 +10,7 @@ var SpawnPositions:Line2D
 var max_position:Vector2
 var min_position:Vector2
 
+onready var screensize = get_viewport_rect().size
 
 func _ready():
 	randomize()
@@ -61,6 +62,7 @@ func wave1(): #Asteroids
 			var scale:float = rand_range(1, 3)
 			var b:Node2D = BulletSystem.fire(Asteroid, Vector2(max_position.x+20, rand_range(max_position.y, min_position.y)), 180, 100, get_parent()) #100/scale
 			b.scale = Vector2(scale, scale)
+			b.position.y = clamp(b.position.y, 100, screensize.y-100)
 			yield(get_tree().create_timer(.2), "timeout")
 		yield(get_tree().create_timer(rand_range(2, 4)), "timeout")
 	emit_signal("wave_finished")
@@ -70,11 +72,13 @@ func wave2():
 		for i in range(3):
 				var e:Node2D = BulletSystem.fire(Enemy01, Vector2(max_position.x+20, rand_range(max_position.y, min_position.y)), 180, 100, get_parent()) #100/scale
 				e.shoot_pat1()
+				e.position.y = clamp(e.position.y, 100, screensize.y-100)
 				yield(get_tree().create_timer(1), "timeout")
 		yield(get_tree().create_timer(2), "timeout")
 		for i in range(3):
 				var e:Node2D = BulletSystem.fire(Enemy02, Vector2(max_position.x+20, rand_range(max_position.y, min_position.y)), 180, 100, get_parent()) #100/scale
 				e.shoot_pat1()
+				e.position.y = clamp(e.position.y, 100, screensize.y-100)
 				yield(get_tree().create_timer(1), "timeout")
 		yield(get_tree().create_timer(1), "timeout")
 	emit_signal("wave_finished")
@@ -84,11 +88,13 @@ func wave3():
 		for i in range(3):
 				var e:Node2D = BulletSystem.fire(Enemy01, Vector2(max_position.x+20, rand_range(max_position.y, min_position.y)), 180, 100, get_parent()) #100/scale
 				e.shoot_pat1()
+				e.position.y = clamp(e.position.y, 100, screensize.y-100)
 				yield(get_tree().create_timer(.2), "timeout")
 		yield(get_tree().create_timer(2), "timeout")
 		for i in range(3):
 				var e:Node2D = BulletSystem.fire(Enemy02, Vector2(max_position.x+20, rand_range(max_position.y, min_position.y)), 180, 100, get_parent()) #100/scale
 				e.shoot_pat1()
+				e.position.y = clamp(e.position.y, 100, screensize.y-100)
 				yield(get_tree().create_timer(.2), "timeout")
 		yield(get_tree().create_timer(1), "timeout")
 	emit_signal("wave_finished")
