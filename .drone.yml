@@ -16,12 +16,8 @@ steps:
   commands:
   - git submodule update --init --recursive -j 8
 
-- name: export
-  commands:
-  - mkdir builds
-  - mkdir builds/linux
-  - Godot_v3.1.1-stable_linux_headless.64 --export-debug "Linux/X11" --path . builds/linux/jogo_exportado_linux
-
 - name: gut
   commands:
   - Godot_v3.1.1-stable_linux_headless.64 -s --path . addons/gut/gut_cmdln.gd -gdir=res://unit_testing/Unit/ -gprefix=test -gexit
+
+
