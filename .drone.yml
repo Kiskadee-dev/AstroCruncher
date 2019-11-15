@@ -14,7 +14,7 @@ node:
 steps:
 - name: submodules
   commands:
-  - git submodule update --recursive --remote
+  - git submodule update --init --recursive -j 8
 
 - name: export
   commands:
