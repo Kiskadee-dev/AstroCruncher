@@ -1,7 +1,5 @@
 extends Node2D
 
-var health:float = 10000
-
 var play_area = Rect2()
 
 var swarm_attacker = preload("res://swarm_attacker.tscn")
@@ -9,14 +7,14 @@ var swarm_attacker2 = preload("res://swarm_attacker2_ring.tscn")
 var swarm_attacker3 = preload("res://swarm_attacker3_slow_ring.tscn")
 var area_attack = preload("res://Boss Attacks/Warning_area_boss_attack.tscn")
 onready var bullet_explosion_effect = preload("res://explosion_bullet.tscn")
-
 signal attack_finished
 
 func _ready():
 	play_area = get_viewport().get_visible_rect()
 
 func start_boss():
-	while health > 0:
+	player_stats.emit_signal("show_boss_health")
+	while player_stats.boss_health > 0:
 		randomize()
 		swarm_attack()
 		yield(self, "attack_finished")
@@ -105,12 +103,7 @@ func asteroid_attack():
 	emit_signal("attack_finished")
 
 func damage(value):
-	health -= value
-	health = clamp(health, 0, 10000)
-	if game_configuration.sfx:
-		#AudioPool.play(AudioPool.soundlib.boom)
-		if health == 0:
-			print("boss dead")
+	player_stats.damage_boss(value)
 
 func _on_Damage_Area2D_area_entered(area):
 	if visible:

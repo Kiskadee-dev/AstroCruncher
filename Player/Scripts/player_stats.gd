@@ -62,6 +62,20 @@ func damage(value:float):
 			else:
 				emit_signal("game_over")
 
+signal boss_health_updated
+signal show_boss_health
+var boss_health = 10000
+
+func damage_boss(value:float):
+	if not dead:
+		if player_stats.shield:
+			return
+		boss_health -= value
+		boss_health = clamp(boss_health, 0, 10000)
+		emit_signal("boss_health_updated")
+		if boss_health <= 0:
+			print("boss is dead")
+
 func respawn():
 	health = 100
 	emit_signal("health_updated")

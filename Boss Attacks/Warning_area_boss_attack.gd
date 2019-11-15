@@ -29,7 +29,5 @@ func _process(delta):
 				return
 		emit_signal("attack_finished")
 		hide()
-		position = Vector2(2000,2000)
-		yield(get_tree().create_timer(10), "timeout")
 		if done():
 			call_deferred("queue_free")
