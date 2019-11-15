@@ -1,6 +1,6 @@
 ---
 kind: pipeline
-type: exec
+type: docker
 name: default
 
 platform:
@@ -8,23 +8,28 @@ platform:
   arch: amd64
 
 node:
-  runner: potato-core
-
+  runner: potato-core-docker
 
 steps:
+
 - name: submodules
+  image: alpine/git
   commands:
   - git submodule update --init --recursive -j 8
 
 - name: reimport
+  image: godot
+  pull: never
   commands:
   - mkdir builds
   - mkdir builds/linux
-  - Godot_v3.1.1-stable_linux_headless.64 --export-debug "nil" --path . builds/linux/jogo_exportado_linux
+  - godot --export-debug "nil" --path . builds/linux/jogo_exportado_linux
 
 
 - name: gut
+  image: godot
+  pull: never
   commands:
-  - Godot_v3.1.1-stable_linux_headless.64 -s --path . addons/gut/gut_cmdln.gd -gdir=res://unit_testing/Unit/ -gprefix=test -gexit
+  - godot -s --path . addons/gut/gut_cmdln.gd -gdir=res://unit_testing/Unit/ -gprefix=test -gexit
 
 

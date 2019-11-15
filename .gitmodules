@@ -1,6 +1,6 @@
 [submodule "BulletSystem"]
 	path = BulletSystem
-	url = http://localhost:3000/STKzica/BulletSystem.git
+	url = http://192.168.1.66:3000/STKzica/BulletSystem.git
 [submodule "JoystickSystem"]
 	path = JoystickSystem
-	url = http://localhost:3000/STKzica/JoystickSystem.git
+	url = http://192.168.1.66:3000/STKzica/JoystickSystem.git
