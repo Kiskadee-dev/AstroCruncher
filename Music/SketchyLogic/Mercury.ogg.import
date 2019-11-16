@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Mercury.ogg-c6f1b040bde8fc9e4a27f0ff27adaf69.oggstr"
+
+[deps]
+
+source_file="res://Music/SketchyLogic/Mercury.ogg"
+dest_files=[ "res://.import/Mercury.ogg-c6f1b040bde8fc9e4a27f0ff27adaf69.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

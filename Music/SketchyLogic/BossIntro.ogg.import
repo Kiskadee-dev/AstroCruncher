@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/BossIntro.ogg-a4353a8341aa0ff63e7761450aebb150.oggstr"
+
+[deps]
+
+source_file="res://Music/SketchyLogic/BossIntro.ogg"
+dest_files=[ "res://.import/BossIntro.ogg-a4353a8341aa0ff63e7761450aebb150.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
