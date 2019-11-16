@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Intro Jingle.ogg-e455fb4fc9b23a12690642ee33cf3b17.oggstr"
+
+[deps]
+
+source_file="res://Music/SketchyLogic/Intro Jingle.ogg"
+dest_files=[ "res://.import/Intro Jingle.ogg-e455fb4fc9b23a12690642ee33cf3b17.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

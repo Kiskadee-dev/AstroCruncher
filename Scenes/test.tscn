@@ -8,7 +8,7 @@
 [ext_resource path="res://UI/GUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://BulletSystem/test_gui/CanvasLayer.tscn" type="PackedScene" id=7]
 [ext_resource path="res://EnemySpawner/EnemySpawner.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Music/Digital Voyage.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Music/SketchyLogic/Venus.ogg" type="AudioStream" id=9]
 [ext_resource path="res://Scenes/Level_Music.gd" type="Script" id=10]
 [ext_resource path="res://Music/Epic Battle.ogg" type="AudioStream" id=11]
 [ext_resource path="res://Scenes/BOSS_Music.gd" type="Script" id=12]
@@ -119,7 +119,6 @@ texture = ExtResource( 5 )
 [node name="test_gui" parent="." instance=ExtResource( 7 )]
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 8 )]
-editor/display_folded = true
 
 [node name="Level_Music" type="AudioStreamPlayer" parent="EnemySpawner"]
 stream = ExtResource( 9 )
