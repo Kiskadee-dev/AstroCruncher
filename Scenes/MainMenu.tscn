@@ -1,21 +1,23 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Music/490511__soundflakes__lost-in-the-dream.ogg" type="AudioStream" id=1]
-[ext_resource path="res://MenuAudio.gd" type="Script" id=2]
-[ext_resource path="res://Art/Scripts/Parallax/ParallaxLayer.gd" type="Script" id=3]
-[ext_resource path="res://Art/sky/sky.png" type="Texture" id=4]
-[ext_resource path="res://Art/sky/sky_transparente.png" type="Texture" id=5]
-[ext_resource path="res://UI/MainMenuUI.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Player/player_sprite.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://Music/490511__soundflakes__lost-in-the-dream.ogg" type="AudioStream" id=2]
+[ext_resource path="res://MenuAudio.gd" type="Script" id=3]
+[ext_resource path="res://Art/Scripts/Parallax/ParallaxLayer.gd" type="Script" id=4]
+[ext_resource path="res://Art/sky/sky.png" type="Texture" id=5]
+[ext_resource path="res://Art/sky/sky_transparente.png" type="Texture" id=6]
+[ext_resource path="res://UI/MainMenuUI.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Player/player_sprite.tscn" type="PackedScene" id=8]
 
 [node name="MainMenu" type="Node2D"]
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_horizontal_guides_": [ 310.017 ]
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 1 )
-script = ExtResource( 2 )
+stream = ExtResource( 2 )
+script = ExtResource( 3 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -24,22 +26,22 @@ editor/display_folded = true
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
 motion_mirroring = Vector2( 1900, 0 )
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer/ParallaxBackground/ParallaxLayer"]
 position = Vector2( 500, 302.408 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
 motion_mirroring = Vector2( 1900, 0 )
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 parallax_speed = 250.0
 
 [node name="Sprite2" type="Sprite" parent="CanvasLayer/ParallaxBackground/ParallaxLayer2"]
 position = Vector2( 500, 288.007 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
-[node name="Menu UI" parent="CanvasLayer" instance=ExtResource( 6 )]
+[node name="Menu UI" parent="CanvasLayer" instance=ExtResource( 7 )]
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.0
@@ -47,5 +49,6 @@ margin_left = -512.0
 margin_right = 512.0
 margin_bottom = 600.0
 
-[node name="player_sprite" parent="." instance=ExtResource( 7 )]
+[node name="player_sprite" parent="." instance=ExtResource( 8 )]
 position = Vector2( 221.93, 310.354 )
+frame = 1
