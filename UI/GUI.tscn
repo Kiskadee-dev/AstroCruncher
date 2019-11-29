@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Font/Fascinate_Inline/FascinateInline-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://UI/Label2.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Lifebar/Lifebar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Font/new_dynamicfont.tres" type="DynamicFont" id=5]
 [ext_resource path="res://UI/Label_score.gd" type="Script" id=6]
+[ext_resource path="res://UI/GameOverUI.tscn" type="PackedScene" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 42
@@ -67,3 +68,14 @@ custom_fonts/font = ExtResource( 5 )
 text = "Scored: 9"
 align = 2
 script = ExtResource( 6 )
+
+[node name="Game Over UI" parent="." instance=ExtResource( 7 )]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 300.0

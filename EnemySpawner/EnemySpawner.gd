@@ -17,6 +17,9 @@ func _ready():
 	get_viewport().connect("size_changed", self, "update_spawn")
 	update_spawn()
 	yield(get_tree().create_timer(1), "timeout")
+	call_deferred("spawn_enemies")
+
+func spawn_enemies():
 	wave1()
 	yield(self, "wave_finished")
 	wave2()
@@ -57,6 +60,9 @@ func update_spawn():
 	min_position = get_viewport().get_visible_rect().end
 
 func wave1(): #Asteroids
+	var t = Timer.new()
+	add_child(t)
+	t.one_shot = true
 	for j in range(5):
 		for i in range(rand_range(10, 25)):
 			var scale:float = rand_range(1, 3)

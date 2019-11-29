@@ -119,6 +119,7 @@ texture = ExtResource( 5 )
 [node name="test_gui" parent="." instance=ExtResource( 7 )]
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 8 )]
+editor/display_folded = true
 
 [node name="Level_Music" type="AudioStreamPlayer" parent="EnemySpawner"]
 stream = ExtResource( 9 )
@@ -128,6 +129,9 @@ script = ExtResource( 10 )
 stream = ExtResource( 11 )
 script = ExtResource( 12 )
 
-[node name="Joystick" parent="." instance=ExtResource( 13 )]
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="Joystick" parent="CanvasLayer2" instance=ExtResource( 13 )]
 position = Vector2( 155.761, 470.413 )
 circle_color = Color( 0.435294, 0.419608, 0.419608, 0.6 )

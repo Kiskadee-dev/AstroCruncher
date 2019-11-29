@@ -60,7 +60,12 @@ func damage(value:float):
 				yield(get_tree().create_timer(3), "timeout")
 				respawn()
 			else:
+				dead = true
+				emit_signal("player_died")
 				emit_signal("game_over")
+
+func new_game():
+	reset_stats()
 
 signal boss_health_updated
 signal show_boss_health
@@ -76,6 +81,14 @@ func damage_boss(value:float):
 		if boss_health <= 0:
 			print("boss is dead")
 
+func reset_stats():
+	score=0
+	lifes=3
+	health = 100
+	emit_signal("health_updated")
+	emit_signal("god_mode_disabled")
+	dead = false
+	
 func respawn():
 	health = 100
 	emit_signal("health_updated")
