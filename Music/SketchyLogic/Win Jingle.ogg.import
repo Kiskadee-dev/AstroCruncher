@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Win Jingle.ogg-0bb45f0ffd21e8c300c0f62be205b122.oggs
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

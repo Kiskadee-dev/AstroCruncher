@@ -9,44 +9,46 @@ var area_attack = preload("res://Boss Attacks/Warning_area_boss_attack.tscn")
 onready var bullet_explosion_effect = preload("res://explosion_bullet.tscn")
 signal attack_finished
 
+var attack_function_state:GDScriptFunctionState
+
 func _ready():
 	play_area = get_viewport().get_visible_rect()
+	player_stats.connect("boss_dead", self, "die")
 
 func start_boss():
 	player_stats.emit_signal("show_boss_health")
-	while player_stats.boss_health > 0:
-		randomize()
-		swarm_attack()
-		yield(self, "attack_finished")
-		swarm_attack2()
-		yield(self, "attack_finished")
-		warnpat()
-		swarm_attack4()
-		yield(self, "attack_finished")
-		swarm_attack3()
-		swarm_attack()
-		yield(self, "attack_finished")
-		yield(self, "attack_finished")
-		warnpat()
-		swarm_attack3()
-		swarm_attack()
-		yield(self, "attack_finished")
-		yield(self, "attack_finished")
-		yield(self, "attack_finished")
-		swarm_attack()
-		swarm_attack()
-		swarm_attack()
-		yield(self, "attack_finished")
-		yield(self, "attack_finished")
-		yield(self, "attack_finished")
-		warnpat()
-		swarm_attack3()
-		swarm_attack()
-		asteroid_attack()
-		yield(self, "attack_finished")
-		yield(self, "attack_finished")
-		yield(self, "attack_finished")
-		yield(self, "attack_finished")
+	randomize()
+	swarm_attack()
+	yield(self, "attack_finished")
+	swarm_attack2()
+	yield(self, "attack_finished")
+	warnpat()
+	swarm_attack4()
+	yield(self, "attack_finished")
+	swarm_attack3()
+	swarm_attack()
+	yield(self, "attack_finished")
+	yield(self, "attack_finished")
+	warnpat()
+	swarm_attack3()
+	swarm_attack()
+	yield(self, "attack_finished")
+	yield(self, "attack_finished")
+	yield(self, "attack_finished")
+	swarm_attack()
+	swarm_attack()
+	swarm_attack()
+	yield(self, "attack_finished")
+	yield(self, "attack_finished")
+	yield(self, "attack_finished")
+	warnpat()
+	swarm_attack3()
+	swarm_attack()
+	asteroid_attack()
+	yield(self, "attack_finished")
+	yield(self, "attack_finished")
+	yield(self, "attack_finished")
+	yield(self, "attack_finished")
 
 func swarm_attack():
 	for i in range(10):
@@ -98,8 +100,7 @@ func warnpat():
 
 func asteroid_attack():
 	var es = get_node("../EnemySpawner")
-	es.wave1()
-	yield(es, "wave_finished")
+	es.register_wave(es.Wave1)
 	emit_signal("attack_finished")
 
 func damage(value):
@@ -119,3 +120,30 @@ func _on_Damage_Area2D_area_entered(area):
 						get_parent().add_child(ex)
 						ex.position = p.position
 						p._unload()
+
+onready var t = Timer.new()
+func explode():
+	add_child(t)
+	t.wait_time = .2
+	t.one_shot = false
+	t.connect("timeout", self, "spawn_explosion_effect")
+	t.start()
+	player_stats.emit_signal("hide_boss_health")
+
+var count = 0
+func spawn_explosion_effect():
+	if count > 50:
+		t.queue_free()
+	var b:Node2D = bullet_explosion_effect.instance()
+	b.position.x = rand_range(-100, 100)
+	b.position.y = rand_range(-100, 100)
+	add_child(b)
+	if game_configuration.sfx:
+		AudioPool.play(AudioPool.soundlib.boom)
+	count += 1
+
+func disable_collision():
+	$Damage_Area2D.set_deferred("monitoring", false)
+
+func die():
+	$AnimationPlayer.play("Die")

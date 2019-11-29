@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Warp Jingle.ogg-c111d297a54f63cf32f46fe88ae4fe86.ogg
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

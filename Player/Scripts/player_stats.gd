@@ -31,17 +31,17 @@ func _ready():
 	add_child(powerup_timer)
 	add_child(triple_timer)
 	add_child(shield_timer)
-	
+
 	triple_timer.wait_time = 20
 	health_timer.wait_time = 20
-	
+
 	triple_timer.one_shot = true
 	health_timer.one_shot = true
 	powerup_timer.one_shot = true
-	
+
 	triple_timer.start()
 	health_timer.start()
-	
+
 	powerup_timer.connect("timeout", self, "disable_powers")
 	shield_timer.connect("timeout", self, "disable_shield")
 
@@ -69,6 +69,8 @@ func new_game():
 
 signal boss_health_updated
 signal show_boss_health
+signal hide_boss_health
+signal boss_dead
 var boss_health = 10000
 
 func damage_boss(value:float):
@@ -79,7 +81,7 @@ func damage_boss(value:float):
 		boss_health = clamp(boss_health, 0, 10000)
 		emit_signal("boss_health_updated")
 		if boss_health <= 0:
-			print("boss is dead")
+			emit_signal("boss_dead")
 
 func reset_stats():
 	score=0
@@ -88,7 +90,7 @@ func reset_stats():
 	emit_signal("health_updated")
 	emit_signal("god_mode_disabled")
 	dead = false
-	
+
 func respawn():
 	health = 100
 	emit_signal("health_updated")
@@ -133,7 +135,7 @@ func shield_on():
 func disable_shield():
 	shield = false
 	emit_signal("shield_over")
-	
+
 func disable_powers():
 	powers = powerups.none
 
@@ -154,8 +156,8 @@ func spawn_thing_chance(object:Node2D):
 			h.position = object.position
 			object.get_parent().call_deferred("add_child",h)
 			health_timer.start()
-			
-	
+
+
 func add_score(sc):
 	score += sc
 	if score >= 1000:
