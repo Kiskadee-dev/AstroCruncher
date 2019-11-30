@@ -168,3 +168,6 @@ func add_score(sc):
 	if score >= 1000:
 		lifes += 1
 		score -= 1000
+
+func win():
+	level_manager.start_level("win")

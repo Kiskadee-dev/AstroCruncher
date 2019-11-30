@@ -5,7 +5,7 @@
 [ext_resource path="res://Art/Scripts/Parallax/ParallaxLayer.gd" type="Script" id=3]
 [ext_resource path="res://Art/sky/sky.png" type="Texture" id=4]
 [ext_resource path="res://Art/sky/sky_transparente.png" type="Texture" id=5]
-[ext_resource path="res://UI/MainMenuUI.tscn" type="PackedScene" id=6]
+[ext_resource path="res://UI/WinMenuUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Player/player_sprite.tscn" type="PackedScene" id=7]
 
 [node name="MainMenu" type="Node2D"]
@@ -39,14 +39,17 @@ parallax_speed = 250.0
 position = Vector2( 500, 288.007 )
 texture = ExtResource( 5 )
 
-[node name="Menu UI" parent="CanvasLayer" instance=ExtResource( 6 )]
+[node name="Menu UI2" parent="CanvasLayer" instance=ExtResource( 6 )]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.0
+anchor_bottom = 0.5
 margin_left = -512.0
+margin_top = -300.0
 margin_right = 512.0
-margin_bottom = 600.0
+margin_bottom = 300.0
 
 [node name="player_sprite" parent="." instance=ExtResource( 7 )]
 position = Vector2( 221.93, 310.354 )
-frame = 6
+scale = Vector2( 2, 2 )
+frame = 5

@@ -32,7 +32,7 @@ script = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="player_sprite" parent="." instance=ExtResource( 3 )]
-frame = 2
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -2.21912, 1.99744 )

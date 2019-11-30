@@ -25,8 +25,6 @@ func _ready():
 	yield(get_tree().create_timer(1), "timeout")
 	call_deferred("spawn_enemies")
 
-
-
 func spawn_enemies():
 	start_spawning = true
 	return
@@ -37,7 +35,7 @@ func update_spawn():
 	min_position = get_viewport().get_visible_rect().end
 
 var start_spawning:bool = false
-var onda:int = 5
+var onda:int = 0
 var iniciado:bool = false
 var grupo:Array = []
 
@@ -85,13 +83,24 @@ func _process(delta):
 							if not boss.get_node("../boss/AnimationPlayer").is_playing():
 								boss.start_boss()
 								boss.get_node("AnimationPlayer").play("idle")
+								boss.connect("boss_death_animation_finished", self, "win")
 								iniciado = true
 					4:
 						$BOSS_Music.stop()
-						$WIN_Jingle.start()
-						iniciado = true
+						$WIN_Jingle.play()
+						boss_spawned = 5
+					5:
+						if not $WIN_Jingle.is_playing():
+							start_spawning = false
+							onda = 6
+							player_stats.win()
+							iniciado = true
+
 			_:
 				onda = 0
+func win():
+	boss_spawned = 4
+	iniciado = false
 
 func group_ready(increment = true)->bool:
 	for i in grupo:

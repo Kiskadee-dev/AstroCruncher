@@ -109,7 +109,7 @@ func _process(delta):
 				iniciado = true
 			_:
 				onda = 0
-	elif player_stats.boss_health <= 0 and not $AnimationPlayer.is_playing():
+	elif player_stats.boss_health <= 0 and not $AnimationPlayer.is_playing() and start_attacking:
 		iniciado = false
 		start_attacking = false
 		emit_signal("boss_death_animation_finished")

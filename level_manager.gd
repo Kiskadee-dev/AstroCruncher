@@ -1,6 +1,6 @@
 extends Node
 
-var levels = {"menu":"res://Scenes/MainMenu.tscn","0":"res://Scenes/Nivel 1.tscn"}
+var levels = {"win":"res://Scenes/WinMenu.tscn", "menu":"res://Scenes/MainMenu.tscn","0":"res://Scenes/Nivel 1.tscn"}
 var loading_something:bool = false
 
 func start_level(id):
