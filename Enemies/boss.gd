@@ -2,10 +2,13 @@ extends Node2D
 
 var play_area = Rect2()
 
-var swarm_attacker = preload("res://swarm_attacker.tscn")
-var swarm_attacker2 = preload("res://swarm_attacker2_ring.tscn")
-var swarm_attacker3 = preload("res://swarm_attacker3_slow_ring.tscn")
-var area_attack = preload("res://Boss Attacks/Warning_area_boss_attack.tscn")
+onready var asteroid_attack = preload("res://Boss Attacks/Boss_Attacks/Scenes/AsteroidAttack.tscn")
+onready var swarm_attack1 = preload("res://Boss Attacks/Boss_Attacks/Scenes/SwarmAttack1.tscn")
+onready var swarm_attack2 = preload("res://Boss Attacks/Boss_Attacks/Scenes/SwarmAttack2.tscn")
+onready var swarm_attack3 = preload("res://Boss Attacks/Boss_Attacks/Scenes/SwarmAttack3.tscn")
+onready var swarm_attack4 = preload("res://Boss Attacks/Boss_Attacks/Scenes/SwarmAttack4.tscn")
+onready var warning_pattern = preload("res://Boss Attacks/Boss_Attacks/Scenes/WarningPattern.tscn")
+
 onready var bullet_explosion_effect = preload("res://explosion_bullet.tscn")
 signal attack_finished
 
@@ -18,90 +21,8 @@ func _ready():
 func start_boss():
 	player_stats.emit_signal("show_boss_health")
 	randomize()
-	swarm_attack()
-	yield(self, "attack_finished")
-	swarm_attack2()
-	yield(self, "attack_finished")
-	warnpat()
-	swarm_attack4()
-	yield(self, "attack_finished")
-	swarm_attack3()
-	swarm_attack()
-	yield(self, "attack_finished")
-	yield(self, "attack_finished")
-	warnpat()
-	swarm_attack3()
-	swarm_attack()
-	yield(self, "attack_finished")
-	yield(self, "attack_finished")
-	yield(self, "attack_finished")
-	swarm_attack()
-	swarm_attack()
-	swarm_attack()
-	yield(self, "attack_finished")
-	yield(self, "attack_finished")
-	yield(self, "attack_finished")
-	warnpat()
-	swarm_attack3()
-	swarm_attack()
-	asteroid_attack()
-	yield(self, "attack_finished")
-	yield(self, "attack_finished")
-	yield(self, "attack_finished")
-	yield(self, "attack_finished")
-
-func swarm_attack():
-	for i in range(10):
-		var x = rand_range(play_area.position.x+20, play_area.end.x-20)
-		var y = rand_range(play_area.position.y+20, play_area.end.y-20)
-		var s = swarm_attacker.instance()
-		get_parent().add_child(s)
-		s.global_position = Vector2(x,y)
-		s.attack(10, 1000)
-		yield(s, "shooting_finished")
-	emit_signal("attack_finished")
-
-func swarm_attack2():
-	for i in range(10):
-		var x = rand_range(play_area.position.x+20, play_area.end.x-20)
-		var y = rand_range(play_area.position.y+20, play_area.end.y-20)
-		var s = swarm_attacker2.instance()
-		get_parent().add_child(s)
-		s.global_position = Vector2(x,y)
-		yield(s, "shooting_finished")
-	emit_signal("attack_finished")
-
-func swarm_attack3():
-	for i in range(10):
-		var x = rand_range(play_area.position.x+20, play_area.end.x-20)
-		var y = rand_range(play_area.position.y+20, play_area.end.y-20)
-		var s = swarm_attacker.instance()
-		get_parent().add_child(s)
-		s.global_position = Vector2(x,y)
-		s.attack(10, 1000, false)
-		yield(s, "shooting_finished")
-	emit_signal("attack_finished")
-
-func swarm_attack4():
-	var pos:Vector2 = Vector2((get_viewport().get_visible_rect().end.x-get_viewport().get_visible_rect().position.x)/2,(get_viewport().get_visible_rect().end.y-get_viewport().get_visible_rect().position.y)/2)
-	for i in range(4):
-		var s = swarm_attacker3.instance()
-		s.global_position = pos
-		get_parent().add_child(s)
-		yield(s, "shooting_finished")
-		yield(get_tree().create_timer(10), "timeout")
-
-func warnpat():
-	var a = area_attack.instance()
-	get_parent().add_child(a)
-	a.start_attack()
-	yield(a, "attack_finished")
-	emit_signal("attack_finished")
-
-func asteroid_attack():
-	var es = get_node("../EnemySpawner")
-	es.register_wave(es.Wave1)
-	emit_signal("attack_finished")
+	start_attacking = true
+	return
 
 func damage(value):
 	player_stats.damage_boss(value)
@@ -147,3 +68,66 @@ func disable_collision():
 
 func die():
 	$AnimationPlayer.play("Die")
+
+var grupo:Array = []
+var iniciado:bool = false
+var onda:int = 0
+var start_attacking:bool = false
+
+func _process(delta):
+	if start_attacking and not iniciado and player_stats.boss_health > 0:
+		match onda:
+			0:
+				register_attack(swarm_attack1)
+				iniciado = true
+			1:
+				register_attack(swarm_attack2)
+				iniciado = true
+			2:
+				register_attack(warning_pattern)
+				register_attack(swarm_attack4)
+				iniciado = true
+			3:
+				register_attack(swarm_attack3)
+				register_attack(swarm_attack1)
+				iniciado = true
+			4:
+				register_attack(warning_pattern)
+				register_attack(swarm_attack3)
+				register_attack(swarm_attack1)
+				iniciado = true
+			5:
+				register_attack(swarm_attack1)
+				register_attack(swarm_attack1)
+				register_attack(swarm_attack1)
+				iniciado = true
+			6:
+				register_attack(warning_pattern)
+				register_attack(swarm_attack3)
+				register_attack(swarm_attack1)
+				register_attack(asteroid_attack)
+				iniciado = true
+			_:
+				onda = 0
+
+func register_attack(attack:PackedScene):
+	var a = create_attack(attack)
+	a.connect("attack_finished", self, "group_ready")
+	grupo.append(a)
+	return a
+
+func create_attack(attack)->Node2D:
+	attack = attack.instance()
+	add_child(attack)
+	attack.start_attack()
+	return attack
+
+func group_ready()->bool:
+	for i in grupo:
+		if i.attacking:
+			return false
+	while not grupo.empty():
+		grupo.pop_front().queue_free()
+	iniciado = false
+	onda += 1
+	return true

@@ -71,7 +71,7 @@ signal boss_health_updated
 signal show_boss_health
 signal hide_boss_health
 signal boss_dead
-var boss_health = 10000
+var boss_health = 5000
 
 func damage_boss(value:float):
 	if not dead:
@@ -87,6 +87,7 @@ func reset_stats():
 	score=0
 	lifes=3
 	health = 100
+	boss_health = 5000
 	emit_signal("health_updated")
 	emit_signal("god_mode_disabled")
 	dead = false

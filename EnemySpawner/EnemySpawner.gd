@@ -15,6 +15,7 @@ onready var boss_spawn_cooldown:Timer = Timer.new()
 var boss_spawned:int = 0
 onready var music_tween:Tween = Tween.new()
 onready var boss = get_node("../boss")
+
 func _ready():
 	add_child(music_tween)
 	add_child(boss_spawn_cooldown)
@@ -24,11 +25,7 @@ func _ready():
 	yield(get_tree().create_timer(1), "timeout")
 	call_deferred("spawn_enemies")
 
-func start_wave(w)->Node2D:
-	w = w.instance()
-	add_child(w)
-	w.start_wave()
-	return w
+
 
 func spawn_enemies():
 	start_spawning = true
@@ -111,3 +108,10 @@ func register_wave(w, increment = true):
 	var a = start_wave(w)
 	a.connect("wave_finished", self, "group_ready")
 	grupo.append(a)
+	return a
+
+func start_wave(w)->Node2D:
+	w = w.instance()
+	add_child(w)
+	w.start_wave()
+	return w
