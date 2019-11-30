@@ -11,7 +11,7 @@ onready var warning_pattern = preload("res://Boss Attacks/Boss_Attacks/Scenes/Wa
 
 onready var bullet_explosion_effect = preload("res://explosion_bullet.tscn")
 signal attack_finished
-
+signal boss_death_animation_finished
 var attack_function_state:GDScriptFunctionState
 
 func _ready():
@@ -109,6 +109,11 @@ func _process(delta):
 				iniciado = true
 			_:
 				onda = 0
+	elif player_stats.boss_health <= 0 and not $AnimationPlayer.is_playing():
+		iniciado = false
+		start_attacking = false
+		emit_signal("boss_death_animation_finished")
+
 
 func register_attack(attack:PackedScene):
 	var a = create_attack(attack)

@@ -25,6 +25,7 @@ onready var health_timer = Timer.new()
 var bullet_explosion_effect = preload("res://explosion_bullet_player_damage.tscn")
 var heal_box = preload("res://Heal.tscn")
 var powerup_box = preload("res://PowerUp_TripleShoot.tscn")
+var movement_enabled:bool = true
 
 func _ready():
 	add_child(health_timer)
@@ -57,6 +58,7 @@ func damage(value:float):
 				lifes -= 1
 				dead = true
 				emit_signal("player_died")
+				movement_enabled = false
 				yield(get_tree().create_timer(3), "timeout")
 				respawn()
 			else:
@@ -91,8 +93,10 @@ func reset_stats():
 	emit_signal("health_updated")
 	emit_signal("god_mode_disabled")
 	dead = false
+	movement_enabled = true
 
 func respawn():
+	movement_enabled = true
 	health = 100
 	emit_signal("health_updated")
 	emit_signal("player_respawn")
