@@ -3,12 +3,12 @@ extends Node
 var levels = {"menu":"res://Scenes/MainMenu.tscn","0":"res://Scenes/Nivel 1.tscn"}
 var loading_something:bool = false
 
-func start_level(n:int):
+func start_level(id):
 	if not loading_something:
 		loading_something = true
 		FadeSystem.fade_out()
 		yield(FadeSystem, "done")
-		get_tree().change_scene(levels[str(n)])
+		get_tree().change_scene(levels[str(id)])
 		BulletsPool.clean_cache()
 		FadeSystem.fade_in(1)
 		loading_something = false
