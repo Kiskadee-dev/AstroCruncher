@@ -14,12 +14,11 @@ var cooldown:bool = false
 
 onready var sprite = $player_sprite
 
-var screensize
+onready var screensize = get_viewport_rect().size
 
 onready var death_sound = $AudioStreamPlayer2D_boom
 
 func _ready():
-	screensize = get_viewport_rect().size
 	cooldown_timer.wait_time = shoot_cooldown
 	cooldown_timer.one_shot = true
 	cooldown_timer.connect("timeout", self, "cooled")
@@ -28,22 +27,23 @@ func _ready():
 	player_stats.connect("player_died", self, "animate_death")
 
 func _physics_process(delta):
-	movement_vector = inputs.movement_vector
-	move_and_slide(speed*movement_vector)
-	if movement_vector.y > 0:
-		sprite.play("dir")
-	elif movement_vector.y < 0:
-		sprite.play("esq")
-	else:
-		sprite.play("default")
-	position.x = clamp(position.x, 100, screensize.x-100)
-	position.y = clamp(position.y, 100, screensize.y-100)
+	if player_stats.movement_enabled:
+		movement_vector = inputs.movement_vector
+		move_and_slide(speed*movement_vector)
+		if movement_vector.y > 0:
+			sprite.play("dir")
+		elif movement_vector.y < 0:
+			sprite.play("esq")
+		else:
+			sprite.play("default")
+		position.x = clamp(position.x, 100, screensize.x-100)
+		position.y = clamp(position.y, 100, screensize.y-100)
 
 func _process(delta):
 	if shoot and not cooldown and not player_stats.dead:
 		cooldown = true
 		cooldown_timer.start()
-		
+
 		match player_stats.powers:
 			player_stats.powerups.triple:
 				shoot_triple_bullet()
@@ -52,7 +52,7 @@ func _process(delta):
 
 func _on_Inputs_shoot():
 	shoot = true
-	
+
 func _on_Inputs_stopshooting():
 	shoot = false
 
@@ -71,7 +71,7 @@ func animate_blink():
 	show()
 	$AnimationPlayer.play("blink")
 	$AnimationPlayer.get_animation("blink").loop = true
-	
+
 func stop_blink():
 	$AnimationPlayer.get_animation("blink").loop = false
 

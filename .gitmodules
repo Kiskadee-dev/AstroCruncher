@@ -4,3 +4,6 @@
 [submodule "JoystickSystem"]
 	path = JoystickSystem
 	url = http://192.168.1.66:3000/STKzica/JoystickSystem.git
+[submodule "FadeSystem"]
+	path = FadeSystem
+	url = http://192.168.1.66:3000/STKzica/FadeSystem.git

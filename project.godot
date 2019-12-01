@@ -15,9 +15,9 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Shoot em up"
+config/name="Astro Cruncher"
 run/main_scene="res://Scenes/MainMenu.tscn"
-boot_splash/image="res://Art/Asteroid/rotate1/0021.png"
+boot_splash/image="res://Art/sky/sky.png"
 config/icon="res://icon_2.png"
 
 [autoload]
@@ -30,6 +30,7 @@ joystick_output="*res://JoystickSystem/autoload/joystick_output.gd"
 level_manager="*res://level_manager.gd"
 game_configuration="*res://game_configuration.gd"
 AudioPool="*res://AudioPool.gd"
+FadeSystem="*res://FadeSystem/Autoload/FadeSystem.gd"
 
 [debug]
 

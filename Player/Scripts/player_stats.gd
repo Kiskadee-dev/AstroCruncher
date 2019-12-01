@@ -25,23 +25,24 @@ onready var health_timer = Timer.new()
 var bullet_explosion_effect = preload("res://explosion_bullet_player_damage.tscn")
 var heal_box = preload("res://Heal.tscn")
 var powerup_box = preload("res://PowerUp_TripleShoot.tscn")
+var movement_enabled:bool = true
 
 func _ready():
 	add_child(health_timer)
 	add_child(powerup_timer)
 	add_child(triple_timer)
 	add_child(shield_timer)
-	
+
 	triple_timer.wait_time = 20
 	health_timer.wait_time = 20
-	
+
 	triple_timer.one_shot = true
 	health_timer.one_shot = true
 	powerup_timer.one_shot = true
-	
+
 	triple_timer.start()
 	health_timer.start()
-	
+
 	powerup_timer.connect("timeout", self, "disable_powers")
 	shield_timer.connect("timeout", self, "disable_shield")
 
@@ -57,12 +58,45 @@ func damage(value:float):
 				lifes -= 1
 				dead = true
 				emit_signal("player_died")
+				movement_enabled = false
 				yield(get_tree().create_timer(3), "timeout")
 				respawn()
 			else:
+				dead = true
+				emit_signal("player_died")
 				emit_signal("game_over")
 
+func new_game():
+	reset_stats()
+
+signal boss_health_updated
+signal show_boss_health
+signal hide_boss_health
+signal boss_dead
+var boss_health = 5000
+
+func damage_boss(value:float):
+	if not dead:
+		if player_stats.shield:
+			return
+		boss_health -= value
+		boss_health = clamp(boss_health, 0, 10000)
+		emit_signal("boss_health_updated")
+		if boss_health <= 0:
+			emit_signal("boss_dead")
+
+func reset_stats():
+	score=0
+	lifes=3
+	health = 100
+	boss_health = 5000
+	emit_signal("health_updated")
+	emit_signal("god_mode_disabled")
+	dead = false
+	movement_enabled = true
+
 func respawn():
+	movement_enabled = true
 	health = 100
 	emit_signal("health_updated")
 	emit_signal("player_respawn")
@@ -106,7 +140,7 @@ func shield_on():
 func disable_shield():
 	shield = false
 	emit_signal("shield_over")
-	
+
 func disable_powers():
 	powers = powerups.none
 
@@ -127,10 +161,13 @@ func spawn_thing_chance(object:Node2D):
 			h.position = object.position
 			object.get_parent().call_deferred("add_child",h)
 			health_timer.start()
-			
-	
+
+
 func add_score(sc):
 	score += sc
 	if score >= 1000:
 		lifes += 1
 		score -= 1000
+
+func win():
+	level_manager.start_level("win")

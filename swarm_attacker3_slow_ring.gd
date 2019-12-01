@@ -8,6 +8,7 @@ var locked_target:bool
 
 var rot:float = 0
 var alpha:int=0
+var shooted:int = 0
 
 func _ready():
 	add_child(timer)
@@ -19,14 +20,14 @@ func attack():
 	shoot_pat1()
 	yield(self, "shooting_finished")
 	$AnimationPlayer.play("despawn")
-	yield($AnimationPlayer, "animation_finished")
-	queue_free()
+	$AnimationPlayer.connect("animation_finished", self, "destroy_self")
 
-var shooted:int = 0
+func destroy_self(s):
+	call_deferred("queue_free")
 
 func start_pattern():
 	timer.disconnect("timeout", self, "start_pattern")
-	timer.wait_time = .1
+	timer.wait_time = .01
 	shooting = true
 	shooted = 0
 	#timer.start()
@@ -34,13 +35,13 @@ func start_pattern():
 func _process(delta):
 	if shooting and not player_stats.dead:
 		if shooted < 160:
-			timer.start()
-			rot = shooted+shooted*50
-			#rotation_degrees = shooted
-			alpha=shooted
-			shoot()
-			shooted += 1
-			yield(get_tree().create_timer(1), "timeout")
+			if timer.is_stopped():
+				timer.start()
+				rot = shooted+shooted*50
+				#rotation_degrees = shooted
+				alpha=shooted
+				shoot()
+				shooted += 1
 		else:
 			shooting = false
 			emit_signal("shooting_finished")

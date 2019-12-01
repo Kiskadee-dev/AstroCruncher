@@ -1,0 +1,95 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://UI/GameOverUI.gd" type="Script" id=1]
+[ext_resource path="res://Font/Fascinate_Inline/FascinateInline-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Font/MainMenuUIButtonStyleHover.tres" type="StyleBox" id=3]
+[ext_resource path="res://Font/MainMenuUIButtonStylePress.tres" type="StyleBox" id=4]
+[ext_resource path="res://Font/MainMenuUIButtonStyle.tres" type="StyleBox" id=5]
+[ext_resource path="res://Font/button.tres" type="DynamicFont" id=6]
+[ext_resource path="res://UI/Button_play.gd" type="Script" id=7]
+[ext_resource path="res://UI/Button_quit.gd" type="Script" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 52
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="Game Over UI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 300.153 ],
+"_edit_vertical_guides_": [ 500.529 ]
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -231.0
+margin_top = 183.0
+margin_right = 209.5
+margin_bottom = 69.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 440.0
+margin_bottom = 173.0
+custom_constants/separation = 12
+
+[node name="CenterContainer3_title" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+margin_right = 440.0
+margin_bottom = 69.0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer3_title"]
+modulate = Color( 0.501961, 1, 0, 1 )
+margin_left = 67.0
+margin_right = 373.0
+margin_bottom = 69.0
+custom_fonts/font = SubResource( 1 )
+text = "Game Over!"
+
+[node name="CenterContainer_play" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 81.0
+margin_right = 440.0
+margin_bottom = 121.0
+
+[node name="Button_play" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer_play"]
+margin_left = 103.0
+margin_right = 337.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 200, 40 )
+size_flags_horizontal = 0
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/normal = ExtResource( 5 )
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 0.501961, 1, 0, 1 )
+custom_colors/font_color_hover = Color( 0.501961, 1, 0, 1 )
+custom_colors/font_color_pressed = Color( 0.501961, 1, 0, 1 )
+text = "Jogar Novamente"
+script = ExtResource( 7 )
+
+[node name="CenterContainer2_quit" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+editor/display_folded = true
+margin_top = 133.0
+margin_right = 440.0
+margin_bottom = 173.0
+
+[node name="Button_quit" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer2_quit"]
+margin_left = 120.0
+margin_right = 320.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 200, 40 )
+size_flags_horizontal = 0
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/normal = ExtResource( 5 )
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 0.501961, 1, 0, 1 )
+custom_colors/font_color_hover = Color( 0.501961, 1, 0, 1 )
+custom_colors/font_color_pressed = Color( 0.501961, 1, 0, 1 )
+text = "Sair"
+script = ExtResource( 8 )
+[connection signal="button_down" from="MarginContainer/VBoxContainer/CenterContainer_play/Button_play" to="MarginContainer/VBoxContainer/CenterContainer_play/Button_play" method="_on_Button_play_button_down"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/CenterContainer2_quit/Button_quit" to="MarginContainer/VBoxContainer/CenterContainer2_quit/Button_quit" method="_on_Button_quit_button_down"]

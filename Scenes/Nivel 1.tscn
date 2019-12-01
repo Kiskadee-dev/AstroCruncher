@@ -1,0 +1,182 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Enemies/boss.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Art/Scripts/Parallax/ParallaxLayer.gd" type="Script" id=3]
+[ext_resource path="res://Art/sky/sky.png" type="Texture" id=4]
+[ext_resource path="res://Art/sky/sky_transparente.png" type="Texture" id=5]
+[ext_resource path="res://UI/GUI.tscn" type="PackedScene" id=6]
+[ext_resource path="res://BulletSystem/test_gui/CanvasLayer.tscn" type="PackedScene" id=7]
+[ext_resource path="res://EnemySpawner/EnemySpawner.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Music/SketchyLogic/Venus.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Scenes/Level_Music.gd" type="Script" id=10]
+[ext_resource path="res://Scenes/BOSS_Music.gd" type="Script" id=11]
+[ext_resource path="res://Music/SketchyLogic/Win Jingle.ogg" type="AudioStream" id=12]
+[ext_resource path="res://JoystickSystem/JoystickTest.tscn" type="PackedScene" id=13]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Die"
+length = 10.0
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "explode"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 10 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 4.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "disable_collision"
+} ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 9.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3, 6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 851.196, 292.283 ), Vector2( 851.196, 121.749 ), Vector2( 851.196, 372.723 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 6.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4, 5.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -991.823, 283.068 ), Vector2( 1533.11, 283.068 ), Vector2( 851.196, 292.283 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3.9, 4, 5.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( -1, 1 ), Vector2( -1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.5, 2.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Node2D" type="Node2D"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="boss" parent="." instance=ExtResource( 1 )]
+editor/display_folded = true
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -991.823, 283.068 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="boss"]
+anims/Die = SubResource( 1 )
+anims/idle = SubResource( 2 )
+anims/spawn = SubResource( 3 )
+
+[node name="player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 222.266, 230.295 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+editor/display_folded = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer"]
+scroll_offset = Vector2( 1, 0 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+motion_mirroring = Vector2( 1900, 0 )
+script = ExtResource( 3 )
+parallax_speed = 10.0
+
+[node name="Sprite" type="Sprite" parent="CanvasLayer/ParallaxBackground/ParallaxLayer"]
+position = Vector2( 549.533, 295.688 )
+z_index = -1
+texture = ExtResource( 4 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+editor/display_folded = true
+motion_mirroring = Vector2( 1900, 0 )
+script = ExtResource( 3 )
+parallax_speed = 12.0
+
+[node name="Sprite" type="Sprite" parent="CanvasLayer/ParallaxBackground/ParallaxLayer2"]
+position = Vector2( 549.533, 295.688 )
+z_index = -1
+texture = ExtResource( 5 )
+
+[node name="GUI" parent="." instance=ExtResource( 6 )]
+
+[node name="test_gui" parent="." instance=ExtResource( 7 )]
+
+[node name="EnemySpawner" parent="." instance=ExtResource( 8 )]
+
+[node name="Level_Music" type="AudioStreamPlayer" parent="EnemySpawner"]
+stream = ExtResource( 9 )
+script = ExtResource( 10 )
+
+[node name="BOSS_Music" type="AudioStreamPlayer" parent="EnemySpawner"]
+script = ExtResource( 11 )
+
+[node name="WIN_Jingle" type="AudioStreamPlayer" parent="EnemySpawner"]
+stream = ExtResource( 12 )
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="Joystick" parent="CanvasLayer2" instance=ExtResource( 13 )]
+position = Vector2( 155.761, 470.413 )
+circle_color = Color( 0.435294, 0.419608, 0.419608, 0.6 )

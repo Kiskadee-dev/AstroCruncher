@@ -2,30 +2,17 @@
 
 [ext_resource path="res://Font/Fascinate_Inline/FascinateInline-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://UI/Label2.gd" type="Script" id=2]
-[ext_resource path="res://Lifebar/Lifebar.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Font/new_dynamicfont.tres" type="DynamicFont" id=4]
-[ext_resource path="res://UI/Label_score.gd" type="Script" id=5]
+[ext_resource path="res://Lifebar/Lifebar_Boss.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Lifebar/Lifebar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Font/new_dynamicfont.tres" type="DynamicFont" id=5]
+[ext_resource path="res://UI/Label_score.gd" type="Script" id=6]
+[ext_resource path="res://UI/GameOverUI.tscn" type="PackedScene" id=7]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 size = 42
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 1 )
-
-[sub_resource type="Shader" id=1]
-code = "shader_type canvas_item;
-
-uniform float offset=1.0;
-
-void vertex(){
-        VERTEX.y += sin(TIME+offset)*10.0;
-}
-
-"
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
-shader_param/offset = 1.0
 
 [node name="GUI" type="CanvasLayer"]
 
@@ -36,39 +23,59 @@ margin_right = 252.875
 margin_bottom = 64.75
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "x3"
 script = ExtResource( 2 )
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer3_lifeboss" type="MarginContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -506.0
+margin_top = 52.0
+margin_right = 506.0
+margin_bottom = 39.0
+
+[node name="Lifebar_Boss" parent="MarginContainer3_lifeboss" instance=ExtResource( 3 )]
+visible = false
+anchor_left = 0.0
+anchor_right = 0.0
+margin_left = 0.0
+margin_right = 1012.0
+margin_bottom = 12.0
+
+[node name="MarginContainer_lifebar" type="MarginContainer" parent="."]
+editor/display_folded = true
 margin_left = 10.0
 margin_top = 10.0
 margin_bottom = 40.0
 
-[node name="Lifebar" parent="MarginContainer" instance=ExtResource( 3 )]
+[node name="Lifebar" parent="MarginContainer_lifebar" instance=ExtResource( 4 )]
 margin_right = 154.0
 margin_bottom = 31.0
 size_flags_vertical = 0
 
-[node name="MarginContainer2" type="MarginContainer" parent="."]
-material = SubResource( 2 )
+[node name="HBoxContainer_score" type="HBoxContainer" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -280.0
-margin_bottom = 44.0
+margin_left = -530.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -538.0
-margin_bottom = 44.0
-
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer_score"]
 modulate = Color( 0.313726, 1, 0.00392157, 1 )
-margin_right = 538.0
+margin_right = 530.0
 margin_bottom = 44.0
 size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 text = "Scored: 9"
 align = 2
-script = ExtResource( 5 )
+script = ExtResource( 6 )
+
+[node name="Game Over UI" parent="." instance=ExtResource( 7 )]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 300.0

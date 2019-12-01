@@ -6,6 +6,7 @@ var last_chosen:int = -1
 
 signal attack_finished
 var attacking:bool = false
+var done:bool
 
 func _ready():
 	areas = get_children()
@@ -26,3 +27,4 @@ func pattern():
 		yield(current, "done")
 	emit_signal("attack_finished")
 	attacking = false
+	done = true
