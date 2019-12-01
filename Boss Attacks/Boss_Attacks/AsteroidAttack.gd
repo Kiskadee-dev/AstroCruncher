@@ -22,7 +22,7 @@ func _process(delta):
 			asteroid.connect("wave_finished", self, "next")
 		else:
 			attacking = false
-			emit_signal("shooting_finished")
+			emit_signal("attack_finished")
 
-func next():
+func next(a):
 	donext = true

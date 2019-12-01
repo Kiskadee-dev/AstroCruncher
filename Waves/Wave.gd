@@ -5,7 +5,8 @@ onready var Enemy01 = preload("res://Enemies/Enemy01.tscn")
 onready var Enemy02 = preload("res://Enemies/Enemy02.tscn")
 var done:bool
 var started:bool = false
-signal wave_finished
+var increment:bool = true
+signal wave_finished(increment)
 
 var repeated:int=0
 var spawned:int=0
@@ -33,7 +34,7 @@ func finished():
 	repeated = 0
 	spawned = 0
 	started = false
-	emit_signal("wave_finished")
+	emit_signal("wave_finished", increment)
 
 func start_wave():
 	if started:

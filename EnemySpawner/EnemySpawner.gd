@@ -115,6 +115,7 @@ func group_ready(increment = true)->bool:
 
 func register_wave(w, increment = true):
 	var a = start_wave(w)
+	a.increment = increment
 	a.connect("wave_finished", self, "group_ready")
 	grupo.append(a)
 	return a

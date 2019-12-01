@@ -26,12 +26,10 @@ func _process(delta):
 				donext = false
 				if repeated < reapeat_times:
 					repeated+=1
-					var x = rand_range(play_area.position.x+20, play_area.end.x-20)
-					var y = rand_range(play_area.position.y+20, play_area.end.y-20)
-					var s = swarm_attacker.instance()
+					var pos:Vector2 = Vector2((get_viewport().get_visible_rect().end.x-get_viewport().get_visible_rect().position.x)/2,(get_viewport().get_visible_rect().end.y-get_viewport().get_visible_rect().position.y)/2)
+					var s = swarm_attacker3.instance()
 					get_parent().get_parent().add_child(s)
-					s.global_position = Vector2(x,y)
-					s.attack(10, 1000)
+					s.global_position = pos
 					s.connect("shooting_finished", self, "next")
 					state = 1
 					cooldown_timer.start()
