@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Font/Fascinate_Inline/FascinateInline-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Font/MainMenuUIButtonStyleHover.tres" type="StyleBox" id=2]
@@ -8,9 +8,25 @@
 [ext_resource path="res://UI/Button_play.gd" type="Script" id=6]
 [ext_resource path="res://UI/Button_quit.gd" type="Script" id=7]
 [ext_resource path="res://UI/Button_sound.gd" type="Script" id=8]
+[ext_resource path="res://UI/Button_credits.gd" type="Script" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 52
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.129412, 0.301961, 0.137255, 1 )
+border_width_left = 9
+border_width_top = 7
+border_width_right = 10
+border_width_bottom = 7
+border_color = Color( 0.145098, 0.976471, 0.0392157, 1 )
+border_blend = true
+
+[sub_resource type="DynamicFont" id=3]
+size = 12
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 1 )
@@ -33,7 +49,7 @@ margin_bottom = 69.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 margin_right = 440.0
-margin_bottom = 225.0
+margin_bottom = 277.0
 custom_constants/separation = 12
 
 [node name="CenterContainer3_title" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
@@ -67,11 +83,10 @@ custom_fonts/font = ExtResource( 5 )
 custom_colors/font_color = Color( 0.501961, 1, 0, 1 )
 custom_colors/font_color_hover = Color( 0.501961, 1, 0, 1 )
 custom_colors/font_color_pressed = Color( 0.501961, 1, 0, 1 )
-text = "Jogar"
+text = "Play"
 script = ExtResource( 6 )
 
 [node name="CenterContainer2_quit" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
-editor/display_folded = true
 margin_top = 133.0
 margin_right = 440.0
 margin_bottom = 173.0
@@ -89,11 +104,10 @@ custom_fonts/font = ExtResource( 5 )
 custom_colors/font_color = Color( 0.501961, 1, 0, 1 )
 custom_colors/font_color_hover = Color( 0.501961, 1, 0, 1 )
 custom_colors/font_color_pressed = Color( 0.501961, 1, 0, 1 )
-text = "Sair"
+text = "Quit"
 script = ExtResource( 7 )
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
-editor/display_folded = true
 margin_top = 185.0
 margin_right = 440.0
 margin_bottom = 225.0
@@ -116,8 +130,118 @@ custom_fonts/font = ExtResource( 5 )
 custom_colors/font_color = Color( 0.501961, 1, 0, 1 )
 custom_colors/font_color_hover = Color( 0.501961, 1, 0, 1 )
 custom_colors/font_color_pressed = Color( 0.501961, 1, 0, 1 )
-text = "Música"
+text = "Music"
 script = ExtResource( 8 )
+
+[node name="CreditsContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 237.0
+margin_right = 440.0
+margin_bottom = 277.0
+
+[node name="CenterContainer4" type="CenterContainer" parent="MarginContainer/VBoxContainer/CreditsContainer"]
+margin_right = 440.0
+margin_bottom = 40.0
+
+[node name="Button_credits" type="Button" parent="MarginContainer/VBoxContainer/CreditsContainer/CenterContainer4"]
+margin_left = 120.0
+margin_right = 320.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 200, 40 )
+size_flags_horizontal = 0
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/normal = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0.501961, 1, 0, 1 )
+custom_colors/font_color_hover = Color( 0.501961, 1, 0, 1 )
+custom_colors/font_color_pressed = Color( 0.501961, 1, 0, 1 )
+text = "Credits"
+script = ExtResource( 9 )
+
+[node name="PanelContainer_credits" type="PanelContainer" parent="MarginContainer/VBoxContainer/CreditsContainer/CenterContainer4/Button_credits"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -213.0
+margin_top = -193.0
+margin_right = 236.0
+margin_bottom = 65.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CreditsContainer/CenterContainer4/Button_credits/PanelContainer_credits"]
+margin_left = 9.0
+margin_top = 7.0
+margin_right = 439.0
+margin_bottom = 251.0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/CreditsContainer/CenterContainer4/Button_credits/PanelContainer_credits/VBoxContainer"]
+margin_right = 430.0
+margin_bottom = 200.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/CreditsContainer/CenterContainer4/Button_credits/PanelContainer_credits/VBoxContainer/MarginContainer"]
+margin_right = 430.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 0, 200 )
+focus_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/normal_font = SubResource( 3 )
+custom_colors/default_color = Color( 0.623529, 1, 0, 1 )
+text = "Game made by: STKzica
+Discord: STKzica#3452
+https://stkzica.itch.io/
+
+Godot Engine:
+https://godotengine.org/license
+
+Music:
+Title:
+    NES Shooter Music (5 tracks, 3 jingles)
+
+Author:
+    SketchyLogic
+
+URL:
+    https://opengameart.org/content/nes-shooter-music-5-tracks-3-jingles
+
+License(s):
+    * CC0 - http://creativecommons.org/publicdomain/zero/1.0/legalcode
+	
+	
+SFX:
+Athor:
+	Anomaex
+URL:
+	 https://freesound.org/people/Anomaex/sounds/490266/
+License(s):
+	* CC0 - http://creativecommons.org/publicdomain/zero/1.0/legalcode"
+selection_enabled = true
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/CreditsContainer/CenterContainer4/Button_credits/PanelContainer_credits/VBoxContainer"]
+margin_top = 204.0
+margin_right = 430.0
+margin_bottom = 244.0
+
+[node name="Button_close_credits" type="Button" parent="MarginContainer/VBoxContainer/CreditsContainer/CenterContainer4/Button_credits/PanelContainer_credits/VBoxContainer/CenterContainer"]
+margin_left = 115.0
+margin_right = 315.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 200, 40 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/normal = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0.501961, 1, 0, 1 )
+custom_colors/font_color_hover = Color( 0.501961, 1, 0, 1 )
+custom_colors/font_color_pressed = Color( 0.501961, 1, 0, 1 )
+text = "Close"
 [connection signal="button_down" from="MarginContainer/VBoxContainer/CenterContainer_play/Button_play" to="MarginContainer/VBoxContainer/CenterContainer_play/Button_play" method="_on_Button_play_button_down"]
 [connection signal="button_down" from="MarginContainer/VBoxContainer/CenterContainer2_quit/Button_quit" to="MarginContainer/VBoxContainer/CenterContainer2_quit/Button_quit" method="_on_Button_quit_button_down"]
 [connection signal="button_down" from="MarginContainer/VBoxContainer/MarginContainer/CenterContainer4/Button_sound" to="MarginContainer/VBoxContainer/MarginContainer/CenterContainer4/Button_sound" method="_on_Button_sound_button_down"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/CreditsContainer/CenterContainer4/Button_credits" to="MarginContainer/VBoxContainer/CreditsContainer/CenterContainer4/Button_credits" method="_on_Button_credits_button_down"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/CreditsContainer/CenterContainer4/Button_credits/PanelContainer_credits/VBoxContainer/CenterContainer/Button_close_credits" to="MarginContainer/VBoxContainer/CreditsContainer/CenterContainer4/Button_credits" method="_on_Button_close_credits_button_down"]

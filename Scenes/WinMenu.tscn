@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Music/490511__soundflakes__lost-in-the-dream.ogg" type="AudioStream" id=1]
+[ext_resource path="res://Music/SketchyLogic/Mars.ogg" type="AudioStream" id=1]
 [ext_resource path="res://MenuAudio.gd" type="Script" id=2]
 [ext_resource path="res://Art/Scripts/Parallax/ParallaxLayer.gd" type="Script" id=3]
 [ext_resource path="res://Art/sky/sky.png" type="Texture" id=4]
@@ -52,4 +52,4 @@ margin_bottom = 300.0
 [node name="player_sprite" parent="." instance=ExtResource( 7 )]
 position = Vector2( 221.93, 310.354 )
 scale = Vector2( 2, 2 )
-frame = 5
+frame = 0

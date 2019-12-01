@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/MainMenu.gd" type="Script" id=1]
-[ext_resource path="res://Music/490511__soundflakes__lost-in-the-dream.ogg" type="AudioStream" id=2]
+[ext_resource path="res://Music/SketchyLogic/Mars.ogg" type="AudioStream" id=2]
 [ext_resource path="res://MenuAudio.gd" type="Script" id=3]
 [ext_resource path="res://Art/Scripts/Parallax/ParallaxLayer.gd" type="Script" id=4]
 [ext_resource path="res://Art/sky/sky.png" type="Texture" id=5]
