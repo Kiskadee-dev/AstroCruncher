@@ -50,4 +50,4 @@ margin_bottom = 600.0
 
 [node name="player_sprite" parent="." instance=ExtResource( 8 )]
 position = Vector2( 221.93, 310.354 )
-frame = 0
+frame = 5

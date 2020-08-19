@@ -12,15 +12,15 @@ func _ready():
 	if OS.has_feature("Android"):
 		use_joystick = true
 
-func _process(delta):
+func _process(_delta):
 	if use_joystick:
-		movement_vector = joystick_output.joystick_output
+		movement_vector = JoystickOutput.joystick_output
 		if not shooting:
-			if joystick_output.b1:
+			if JoystickOutput.b1:
 				shooting = true
 				emit_signal("shoot")
 		else:
-			if not joystick_output.b1:
+			if not JoystickOutput.b1:
 				shooting = false
 				emit_signal("stopshooting")
 
