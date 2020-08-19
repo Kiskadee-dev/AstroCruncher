@@ -2,7 +2,7 @@ extends Node2D
 
 enum soundlib {boom}
 
-onready var sound_library = {soundlib.boom:load("res://Music/SFX_scenes/boom.tscn")}
+onready var sound_library = {soundlib.boom:preload("res://Music/SFX_scenes/boom.tscn")}
 
 var active_audio = {}
 var inactive_audio = {}
