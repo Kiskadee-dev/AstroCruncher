@@ -9,7 +9,7 @@ func start_wave():
 	started = true
 
 var stage:int = 0
-func _process(delta):
+func _process(_delta):
 	if cooldown_timer.is_stopped() and started:
 		if repeated < reapeat_times:
 			if spawned < spawn_quantity:

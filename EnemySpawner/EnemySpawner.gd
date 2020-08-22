@@ -39,7 +39,7 @@ var onda:int = 0
 var iniciado:bool = false
 var grupo:Array = []
 
-func _process(delta):
+func _process(_delta):
 	if start_spawning and not iniciado:
 		match onda:
 			0:

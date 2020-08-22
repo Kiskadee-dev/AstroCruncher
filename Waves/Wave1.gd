@@ -6,7 +6,7 @@ func start_wave():
 	spawn_quantity = rand_range(10, 15)
 	started = true
 
-func _process(delta):
+func _process(_delta):
 	if cooldown_timer.is_stopped() and started:
 		if repeated < reapeat_times:
 			if spawned < spawn_quantity:

@@ -74,7 +74,7 @@ var iniciado:bool = false
 var onda:int = 0
 var start_attacking:bool = false
 
-func _process(delta):
+func _process(_delta):
 	if start_attacking and not iniciado and player_stats.boss_health > 0:
 		match onda:
 			0:

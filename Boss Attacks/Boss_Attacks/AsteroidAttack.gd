@@ -12,7 +12,7 @@ func asteroid_attack():
 	es.register_wave(es.Wave1)
 	emit_signal("attack_finished")
 
-func _process(delta):
+func _process(_delta):
 	if attacking and donext:
 		donext = false
 		if repeated < reapeat_times:

@@ -19,7 +19,7 @@ var original_damage:float
 func start_pattern():
 	pass
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 func shoot_pat1():
