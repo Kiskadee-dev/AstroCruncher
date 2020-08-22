@@ -1,4 +1,4 @@
-extends Node
+extends CanvasLayer
 
 const particle_materials = [
 	preload("res://Art/Particle materials/explosion_bullet.material"),
