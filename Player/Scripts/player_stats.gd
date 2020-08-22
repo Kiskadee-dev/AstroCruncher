@@ -23,6 +23,7 @@ onready var shield_timer = Timer.new()
 onready var health_timer = Timer.new()
 
 var bullet_explosion_effect = preload("res://explosion_bullet_player_damage.tscn")
+var bullet_explosion_effect_enemy = preload("res://explosion_bullet.tscn")
 var heal_box = preload("res://Heal.tscn")
 var powerup_box = preload("res://PowerUp_TripleShoot.tscn")
 var movement_enabled:bool = true

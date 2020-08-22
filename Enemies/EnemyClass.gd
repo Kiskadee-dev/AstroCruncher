@@ -1,7 +1,7 @@
 extends "res://BulletSystem/Bullet2D.gd"
 
 onready var projectile = preload("res://Bullets/EnemyBullet.tscn")
-onready var bullet_explosion_effect = preload("res://explosion_bullet.tscn")
+onready var bullet_explosion_effect = player_stats.bullet_explosion_effect_enemy
 var timer:Timer = Timer.new()
 
 var damage:float
