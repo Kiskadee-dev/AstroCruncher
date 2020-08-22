@@ -1,5 +1,6 @@
 extends Node
 
+var Error = load("res://ErrorHandler/Error.gd").new()
 var levels = {"win":"res://Scenes/WinMenu.tscn", "menu":"res://Scenes/MainMenu.tscn","0":"res://Scenes/Nivel 1.tscn"}
 var loading_something:bool = false
 
@@ -8,7 +9,7 @@ func start_level(id):
 		loading_something = true
 		FadeSystem.fade_out()
 		yield(FadeSystem, "done")
-		get_tree().change_scene(levels[str(id)])
+		Error.handle(get_tree().change_scene(levels[str(id)]))
 		BulletsPool.clean_cache()
 		FadeSystem.fade_in(1)
 		loading_something = false

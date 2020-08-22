@@ -17,7 +17,7 @@ func swarm_attack2():
 		yield(s, "shooting_finished")
 	emit_signal("attack_finished")
 
-func _process(delta):
+func _process(_delta):
 	._on_update()
 	if attacking and donext:
 		donext = false

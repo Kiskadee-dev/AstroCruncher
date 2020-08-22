@@ -28,7 +28,7 @@ func start_pattern(projectile_count:int, projectile_speed:float):
 	shooted = 0
 	#timer.start()
 
-func _process(delta):
+func _process(_delta):
 	if shooting and not player_stats.dead:
 		if timer.is_stopped(): 
 			if shooted < 10:

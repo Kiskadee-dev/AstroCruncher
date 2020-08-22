@@ -22,7 +22,7 @@ func done()->bool:
 			return false
 	return true
 
-func _process(delta):
+func _process(_delta):
 	if attack:
 		for i in childs:
 			if i.attacking:

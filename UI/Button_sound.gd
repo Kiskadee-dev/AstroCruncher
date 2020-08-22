@@ -1,6 +1,6 @@
 extends Button
 
-func _process(delta):
+func _process(_delta):
 	if game_configuration.music:
 		modulate = Color.green
 	else:

@@ -18,7 +18,7 @@ func swarm_attack4():
 		yield(get_tree().create_timer(10), "timeout")
 
 var state:int = 0
-func _process(delta):
+func _process(_delta):
 	._on_update()
 	match state:
 		0:

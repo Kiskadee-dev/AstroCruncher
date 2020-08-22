@@ -26,7 +26,7 @@ func _ready():
 	player_stats.connect("player_respawn", self, "animate_blink")
 	player_stats.connect("player_died", self, "animate_death")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if player_stats.movement_enabled:
 		movement_vector = inputs.movement_vector
 		move_and_slide(speed*movement_vector)

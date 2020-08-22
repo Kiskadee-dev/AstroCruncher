@@ -5,7 +5,7 @@ var player:KinematicBody2D
 func _ready():
 	player_stats.connect("shield_over", self, "start_destroy")
 
-func _process(delta):
+func _process(_delta):
 	if player:
 		position = player.position
 	if player_stats.shield:
