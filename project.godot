@@ -32,6 +32,7 @@ game_configuration="*res://game_configuration.gd"
 AudioPool="*res://AudioPool.gd"
 FadeSystem="*res://FadeSystem/Autoload/FadeSystem.gd"
 JoystickOutput="*res://JoystickSystem/autoload/joystickOutput.gd"
+ParticlesCache="*res://Autoload/ParticlesCache.gd"
 
 [debug]
 
