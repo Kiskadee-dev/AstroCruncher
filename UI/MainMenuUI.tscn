@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Font/Fascinate_Inline/FascinateInline-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Font/MainMenuUIButtonStyleHover.tres" type="StyleBox" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://UI/Button_quit.gd" type="Script" id=7]
 [ext_resource path="res://UI/Button_sound.gd" type="Script" id=8]
 [ext_resource path="res://UI/Button_credits.gd" type="Script" id=9]
+[ext_resource path="res://Art/VScrollbarTheme.theme" type="Theme" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 52
@@ -36,6 +37,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_horizontal_guides_": [ 300.153 ],
+"_edit_use_anchors_": false,
 "_edit_vertical_guides_": [ 500.529 ]
 }
 
@@ -53,7 +55,6 @@ margin_bottom = 277.0
 custom_constants/separation = 12
 
 [node name="CenterContainer3_title" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
-editor/display_folded = true
 margin_right = 440.0
 margin_bottom = 69.0
 
@@ -113,7 +114,6 @@ margin_right = 440.0
 margin_bottom = 225.0
 
 [node name="CenterContainer4" type="CenterContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
-editor/display_folded = true
 margin_right = 440.0
 margin_bottom = 40.0
 
@@ -163,13 +163,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -213.0
+margin_left = -216.78
 margin_top = -193.0
-margin_right = 236.0
+margin_right = 232.22
 margin_bottom = 65.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CreditsContainer/CenterContainer4/Button_credits/PanelContainer_credits"]
 margin_left = 9.0
@@ -181,21 +184,29 @@ margin_bottom = 251.0
 margin_right = 430.0
 margin_bottom = 200.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/CreditsContainer/CenterContainer4/Button_credits/PanelContainer_credits/VBoxContainer/MarginContainer"]
+[node name="RichTextLabel_License" type="RichTextLabel" parent="MarginContainer/VBoxContainer/CreditsContainer/CenterContainer4/Button_credits/PanelContainer_credits/VBoxContainer/MarginContainer"]
 margin_right = 430.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 0, 200 )
 focus_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource( 10 )
 custom_fonts/normal_font = SubResource( 3 )
 custom_colors/default_color = Color( 0.623529, 1, 0, 1 )
-text = "Game made by: STKzica
-Discord: STKzica#3452
-https://stkzica.itch.io/
+text = "Game made by: Kiskadee @ smartthinkingkingdom@gmail.com
+Discord: Kiskadee#3452
+https://Kiskadee.itch.io/
+
+Copyright (c) 2020 Matheus Victor
+All rights reserved.
+
+-------------------------------
 
 Godot Engine:
 https://godotengine.org/license
+
+-------------------------------
 
 Music:
 Title:
@@ -210,7 +221,8 @@ URL:
 License(s):
     * CC0 - http://creativecommons.org/publicdomain/zero/1.0/legalcode
 	
-	
+-------------------------------
+
 SFX:
 Athor:
 	Anomaex
