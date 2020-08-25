@@ -11,7 +11,8 @@ signal shield_over
 
 var health:float = 100
 var lifes:int = 3
-var score:int = 0
+var score:int = 0 setget set_score
+var global_score:int = 0
 var dead:bool = false
 
 var powers:int = powerups.none
@@ -28,6 +29,22 @@ var heal_box = preload("res://Heal.tscn")
 var powerup_box = preload("res://PowerUp_TripleShoot.tscn")
 var movement_enabled:bool = true
 
+func set_score(s:int):
+	score = s
+	global_score = s
+	if score >= 1000:
+		lifes += 1
+		score -= 1000
+		global_score -= 1000
+
+func score_sum() -> int:
+	var life_multiplier = 1000
+	var score_result:int = 0
+	if lifes > 3:
+		score_result = (lifes - 3)*1000
+	score_result += global_score
+	return score_result
+	
 func _ready():
 	add_child(health_timer)
 	add_child(powerup_timer)
@@ -165,10 +182,7 @@ func spawn_thing_chance(object:Node2D):
 
 
 func add_score(sc):
-	score += sc
-	if score >= 1000:
-		lifes += 1
-		score -= 1000
+	set_score(score+sc)
 
 func win():
 	level_manager.start_level("win")

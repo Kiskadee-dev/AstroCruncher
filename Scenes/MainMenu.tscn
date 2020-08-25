@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Music/SketchyLogic/Mars.ogg" type="AudioStream" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://Art/sky/sky_transparente.png" type="Texture" id=6]
 [ext_resource path="res://UI/MainMenuUI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Player/player_sprite.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Font/new_dynamicfont.tres" type="DynamicFont" id=9]
+[ext_resource path="res://Scenes/MainMenu-BestScoreLabel.gd" type="Script" id=10]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource( 1 )
@@ -48,6 +50,19 @@ margin_left = -512.0
 margin_right = 512.0
 margin_bottom = 600.0
 
+[node name="Best Score Label" type="Label" parent="CanvasLayer"]
+modulate = Color( 0.501961, 1, 0, 1 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -267.0
+margin_bottom = 44.0
+custom_fonts/font = ExtResource( 9 )
+text = "Best Score: xxx"
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="player_sprite" parent="." instance=ExtResource( 8 )]
 position = Vector2( 221.93, 310.354 )
-frame = 5
+frame = 2

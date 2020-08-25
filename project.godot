@@ -33,6 +33,7 @@ AudioPool="*res://AudioPool.gd"
 FadeSystem="*res://FadeSystem/Autoload/FadeSystem.gd"
 JoystickOutput="*res://JoystickSystem/autoload/joystickOutput.gd"
 ParticlesCache="*res://Autoload/ParticlesCache.gd"
+ScoreSys="*res://Autoload/ScoreSys.gd"
 
 [debug]
 
