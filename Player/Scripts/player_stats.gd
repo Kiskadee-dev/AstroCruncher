@@ -14,7 +14,7 @@ var lifes:int = 3
 var score:int = 0 setget set_score
 var global_score:int = 0
 var dead:bool = false
-
+var game_over:bool = false
 var powers:int = powerups.none
 var shield:bool = false
 
@@ -83,6 +83,7 @@ func damage(value:float):
 				dead = true
 				emit_signal("player_died")
 				emit_signal("game_over")
+				game_over = true
 
 func new_game():
 	reset_stats()
@@ -111,6 +112,7 @@ func reset_stats():
 	emit_signal("health_updated")
 	emit_signal("god_mode_disabled")
 	dead = false
+	game_over = false
 	movement_enabled = true
 
 func respawn():
