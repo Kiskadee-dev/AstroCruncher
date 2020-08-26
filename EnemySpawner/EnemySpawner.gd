@@ -114,11 +114,12 @@ func group_ready(increment = true)->bool:
 	return true
 
 func register_wave(w, increment = true):
-	var a = start_wave(w)
-	a.increment = increment
-	a.connect("wave_finished", self, "group_ready")
-	grupo.append(a)
-	return a
+	if not player_stats.game_over:
+		var a = start_wave(w)
+		a.increment = increment
+		a.connect("wave_finished", self, "group_ready")
+		grupo.append(a)
+		return a
 
 func start_wave(w)->Node2D:
 	w = w.instance()
