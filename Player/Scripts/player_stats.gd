@@ -106,6 +106,8 @@ func damage_boss(value:float):
 
 func reset_stats():
 	score=0
+	if game_over:
+		global_score = 0
 	lifes=3
 	health = 100
 	boss_health = 5000
